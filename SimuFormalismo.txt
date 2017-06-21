@@ -107,42 +107,41 @@ end atomic
 
 functions Libreria is
 	function dist is
-		cola : List (ℝ x Time) → res : ℝ;
-		res = ((t - (head c).2) * Vc);
+		cola : List (ℝ x Time) , tiempo: Time → res : ℝ;
+		res = ((tiempo - (head c).2) * Vc);
 	end dist
 	
 	function potencia is
-		cola : List (ℝ x Time) → res : ℝ;
-		res = (head c).1 * Libreria.dist(cola);
+		cola : List (ℝ x Time),tiempo:Time → res : ℝ;
+		res = (head c).1 * Libreria.dist(cola,tiempo);
 	end potencia
 	
 	function pesoNuevo
-		colaVenc : List (ℝ x Time), r : colaPerd (ℝ x Time) → res : ℝ;
-		res = (head colaVenc).1 * (((head colaPerd).1 * Libreria.dist(colaPerd) / ((head colaVenc).1 * Libreria.dist(colaVenc)));
+		colaVenc : List (ℝ x Time), r : colaPerd (ℝ x Time) ,tiempo:Time → res : ℝ;
+		res = (head colaVenc).1 * (((head colaPerd).1 * Libreria.dist(colaPerd,tiempo) / ((head colaVenc).1 * Libreria.dist(colaVenc,tiempo)));
   	end pesoNuevo
 
   	function calcularσ
-  		colaJug : List (ℝ x Time), r : colaPc (ℝ x Time) → res : Time;
+  		colaJug : List (ℝ x Time), r : colaPc (ℝ x Time) ,tiempo:Time  → res : Time;
   		defcases
   			case
   				res=∞;
   			if ((colaJug={}) ∧ (colaPc={}))
   			case
-  				res=(L - Libreria.dist(colaJug) / VC);
+  				res=(L - Libreria.dist(colaJug,tiempo) / VC);
   			if (¬(colaJug={}) ∧ (colaPc={}))
   			case
-  				res=(L - Libreria.dist(colaJug) / VC);
+  				res=(L - Libreria.dist(colaJug,tiempo) / VC);
   			if ((colaJug={}) ∧ ¬(colaPc={}))
   			case
-  				res=(L - (Libreria.dist(colaJug) + Libreria.dist(colaPc))) / (2*VC);
+  				res=(L - (Libreria.dist(colaJug,tiempo) + Libreria.dist(colaPc,tiempo))) / (2*VC);
   			if (¬(colaJug={}) ∧ ¬(colaPc={}))
 
 
-void ActualizarNuevo (Cola venc, cola perd){
-	(head venc).1 = Libreria.pesoNuevo(Cola venc, cola perd);
-	return venc;
-}
 
+		end defcases
+	end calcularσ
+end Libreria
 
 
 
