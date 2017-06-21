@@ -1,0 +1,154 @@
+atomic Cinta(params) is (S , X , Y , δint, δext, λ, ta) where
+params is
+	L = 25;    //longitud de la cinta
+	VC = 1;    //velocidad constante
+end params
+------------------------------------------------------------------------------------------------------------------------
+S is
+	tipoCola ==List  (ℝ x Time);    //peso y Libreria.distancia recorrida de cada objeto
+	cJ : tipoCola;       //cola jugador pc
+	cPc : tipoCola;      //cola jugador humano
+	σ : Time;        // σ
+end S
+------------------------------------------------------------------------------------------------------------------------
+X is
+	input1 : ℝ;
+	input2 : ℝ;
+end X
+---------------------------------------------------------------------------------------------------------------------------
+Y is
+	Llegada == {LlegoJugador, LlegoPc};
+	Colision == {GanoJugador, GanoPc, Empate} x ℝ x ℝ;
+	out1: Colision;       //indica la llegada de un objeto al final de la cinta
+	out2: Llegada;   
+end Y
+---------------------------------------------------------------------------------------------------------------------------
+δint((cJ, cPc, σ)) is 
+	defcases
+		case
+			tupla :  ℝ x Time; 
+      		tupla.1 = Libreria.pesoNuevo(cJ,cPc);
+      		tupla.2 = (head cJ).2;
+      		cJ = (tail cJ)⁀tupla;
+			cPc = (tail cPc);
+			σ = calcularσ(cJ,cPc);
+		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+		case
+			cJ = tail cJ;
+			tupla :  ℝ x Time; 
+      		tupla.1 = Libreria.pesoNuevo(cPc,cJ);
+      		tupla.2 = (head cpc).2;
+      		cPc = (tail cPc)⁀tupla;
+			σ = calcularσ(cJ,cPc);
+		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+		case
+			cJ = tail cJ;
+			cPc = Libreria.actualizarNuevo(cPc,cJ);
+			σ = calcularσ(cJ,cPc);
+		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ) = Libreria.potencia(cPc))
+		case
+			cJ = tail cJ;
+			cPc = cPc;
+			σ = calcularσ(cJ,cPc);
+		if (#cJ>0 ∧ #cPc=0)
+		case
+			cJ = cJ;
+			cPc = tail cPc;
+			σ = calcularσ(cJ,cPc);
+		if (#cJ=0 ∧ #cPc>0)
+	end defcases
+end δint
+------
+δext((cJ,cPc,σ), e, (port, value)) is
+	defcases
+		case
+			tupla :  ℝ x Time;
+      		tupla.1 = value;
+      		tupla.2 = 0;
+			cJ= cJ⁀tupla;
+			cPc = cPc;
+			σ=calcularσ(cJ,cPc);
+		if (port=input1)
+		case
+			tupla :  ℝ x Time;
+      		tupla.1 = value; 
+      		tupla.2 = 0; 
+			cJ= cJ;
+			cPc = cPc⁀tupla;
+			σ=calcularσ(cJ,cPc);
+		if (port=input2)
+	end defcases
+end δext
+λ(cJ,cPc, σ) is
+	defcases
+		case
+			out1 = (GanoJugador, Libreria.pesoNuevo(cJ,cPc), Libreria.dist(cJ));
+		if (¬(cJ={}) ∧ ¬(cPc={})∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+		case 
+			out1 = (GanoPc, Libreria.pesoNuevo(cPc,cj), Libreria.dist(cPc)) 
+		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+		case
+			out1 = (Empate, 0, 0);
+		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+		case
+			out2 = LlegoJugador;
+		if (¬(cJ={}) ∧ (cPc={}))
+		case
+			out2 = LlegoPc;
+		if ((cJ={}) ∧ ¬(cPc={}))
+	end defcases
+end λ
+
+ta(cJ,cPc, σ) is
+σ;
+end ta
+
+end atomic
+
+functions Libreria is
+	function dist is
+		cola : List (ℝ x Time) → res : ℝ;
+		res = ((t - (head c).2) * Vc);
+	end dist
+	
+	function potencia is
+		cola : List (ℝ x Time) → res : ℝ;
+		res = (head c).1 * Libreria.dist(cola);
+	end potencia
+	
+	function pesoNuevo
+		colaVenc : List (ℝ x Time), r : colaPerd (ℝ x Time) → res : ℝ;
+		res = (head colaVenc).1 * (((head colaPerd).1 * Libreria.dist(colaPerd) / ((head colaVenc).1 * Libreria.dist(colaVenc)));
+  	end pesoNuevo
+
+  	function calcularσ
+  		colaJug : List (ℝ x Time), r : colaPc (ℝ x Time) → res : Time;
+  		defcases
+  			case
+  				res=∞;
+  			if ((colaJug={}) ∧ (colaPc={}))
+  			case
+  				res=(L - Libreria.dist(colaJug) / VC);
+  			if (¬(colaJug={}) ∧ (colaPc={}))
+  			case
+  				res=(L - Libreria.dist(colaJug) / VC);
+  			if ((colaJug={}) ∧ ¬(colaPc={}))
+  			case
+  				res=(L - (Libreria.dist(colaJug) + Libreria.dist(colaPc))) / (2*VC);
+  			if (¬(colaJug={}) ∧ ¬(colaPc={}))
+
+
+void ActualizarNuevo (Cola venc, cola perd){
+	(head venc).1 = Libreria.pesoNuevo(Cola venc, cola perd);
+	return venc;
+}
+
+
+
+
+
+
+
+
+
+

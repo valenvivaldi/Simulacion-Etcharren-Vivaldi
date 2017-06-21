@@ -1,0 +1,57 @@
+X = ℝ x N //siendo R el peso y N el puerto
+
+Y = ({'LlegoIzq','LlegoDer'} x {0}) U (ℝ x ℝ x {'GanoIzq','GanoDer','Empate'} x {1})
+
+S = cola{ℝ,ℝ} x cola{ℝ,ℝ} x ℝ 
+
+ta(s)=ta(ci,cd,σ)	=	σ
+
+λ(s)=λ(ci,cd,σ)	=		('LlegoIzq',0)										if (cd.isEmpty() && !ci.isEmpty())
+						('LlegoDer',0)										if (ci.isEmpty() && !cd.isEmpty())
+						(pesoNuevo(ci,cd),dist(ci),"GanoIzq",1)				if (!ci.isEmpty() && !cd.isEmpty() && potencia(ci) > potencia(cd))
+						(pesoNuevo(cd,ci),dist(ci),"GanoDer",1)				if (!ci.isEmpty() && !cd.isEmpty() && potencia(ci) < potencia(cd))
+						(0,0,"Empate",1)									if (!ci.isEmpty() && !cd.isEmpty() && potencia(ci) = potencia(cd))
+
+δint(ci,cd,σ)=	(ActualizarNuevo(ci,cd), tail cd, calcular (ActualizarNuevo(ci,cd), tail cd)) 	if (!ci.isEmpty() && !cd.isEmpty() && potencia(ci) > potencia(cd))
+				(tail ci, ActualizarNuevo(cd,ci), calcular (tail ci, ActualizarNuevo(cd,ci))) 	if (!ci.isEmpty() && !cd.isEmpty() && potencia(ci) < potencia(cd))
+				(tail ci, tail cd, calcular (tail ci, tail cd)) 								if (!ci.isEmpty() && !cd.isEmpty() && potencia(ci) = potencia(cd))
+				(tail ci, cd, calcular (tail ci, cd))											if (cd.isEmpty() && !ci.isEmpty())
+				(ci, tail cd, calcular (ci, tail cd))											if (ci.isEmpty() && !cd.isEmpty())
+
+δext((ci,cd,σ),e,(peso,puerto))=  	(ci, cd # (peso,t), calcular(ci, cd # (peso,t))) 	if (puerto=1) 
+									(ci # (peso,t), cd, calcular(ci # (peso,t), cd)) 	if (puerto=0)
+
+Real dist(Cola c){
+	return (t - (head c).tiempo) * Vc;
+}
+
+Real potencia(Cola c){
+	return (head c).peso * dist(c);
+}
+
+
+Real pesoNuevo(Cola venc, cola perd){
+	return (head venc).peso * (((head perd).peso * dist(perd))/((head venc).peso *dist(venc)))
+}
+
+void ActualizarNuevo (Cola venc, cola perd){
+	(head venc).peso = pesoNuevo(Cola venc, cola perd);
+	return venc;
+}
+
+calcular (Cola ci, Cola cd){
+	if (cd.isEmpty() && ci.isEmpty()){
+		return infinito;
+	}
+	if (!cd.isEmpty() && ci.isEmpty()){
+		return (L - dist(cd,t)) / Vc;
+	}
+	if (cd.isEmpty() && !ci.isEmpty()){
+		return (L - dist(ci,t)) / Vc;
+	}
+	if (!cd.isEmpty() && !ci.isEmpty()){
+		return (L - (dist(ci) + dist(cd))) / (2*Vc);
+	}
+}
+
+
