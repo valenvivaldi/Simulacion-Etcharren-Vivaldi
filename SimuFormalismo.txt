@@ -1,4 +1,6 @@
-
+//Representacion de Cinta
+//Autores:Valentin Vivaldi y Leandro Javier Etcharren
+//fomalismo utilizado:cml-devs
 atomic Cinta(params) is (S , X , Y , δint, δext, λ, ta) where
 
 params is
@@ -84,46 +86,49 @@ end δint
 		if (port=input2) 					//llega objeto pc
 	end defcases
 end δext
+
+
 λ(cJ,cPc,tiempo,σ) is
 	defcases
 		case
 			out1 = (GanoJugador, Libreria.pesoNuevo(cJ,cPc,tiempo+σ), Libreria.dist(cJ,tiempo+σ));
-		if (¬(cJ={}) ∧ ¬(cPc={})∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ))
+		if (¬(cJ={}) ∧ ¬(cPc={})∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ)) //gano colision jugador
 		case 
 			out1 = (GanoPc, Libreria.pesoNuevo(cPc,cj,tiempo+σ), Libreria.dist(cPc,tiempo+σ)) 
-		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ))
+		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ)) //gano colision pc
 		case
 			out1 = (Empate, 0, 0);
-		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ))
+		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ)) //empate colision
 		case
 			out2 = LlegoJugador;
-		if (¬(cJ={}) ∧ (cPc={}))
+		if (¬(cJ={}) ∧ (cPc={})) //llego al final de la cinta un objeto de jugador
 		case
 			out2 = LlegoPc;
-		if ((cJ={}) ∧ ¬(cPc={}))
+		if ((cJ={}) ∧ ¬(cPc={})) //llego al final de la cinta un objeto de pc
 	end defcases
 end λ
+
 
 ta(cJ,cPc,tiempo, σ) is
 	σ;
 end ta
-
 end atomic
 
 functions Libreria is
 
+
 	// La funcion dist, devuelve la distancia que lleva recorrida el primer elemento de la cola
 	// parametros: la cola y el tiempo actual
-	
+	// retorna: es la distancia recorrida del primer elemento de la cola
 	function dist is
 		cola : List (ℝ x Time) , tiempo: Time → res : ℝ;
 		res = ((tiempo - (head c).2) * Vc);
 	end dist
 
+
 	// La funcion potencia devuelve la potencia de choque del objeto, valor utilizado para la comparacion ante una colision
 	// parametros: la cola y el tiempo actual
 	// retorna: La potencia del primer elemento de la cola
-	
 	function potencia is
 		cola : List (ℝ x Time),tiempo:Time → res : ℝ;
 		res = (head c).1 * Libreria.dist(cola,tiempo);
@@ -133,39 +138,35 @@ functions Libreria is
 	// La funcion pesoNuevo devuelve el peso del elemento ganador de la colision, el cual sufre una reduccion de peso
 	// parametros: la cola ganadora, la cola perdedora y el tiempo actual
 	// retorna: El peso nuevo del primer objeto de la cola vencedora, luego de colisionar con el primer objeto de la cola perdedora
-	
 	function pesoNuevo
 		colaVenc : List (ℝ x Time), r : colaPerd (ℝ x Time) ,tiempo:Time → res : ℝ;
 		res = (head colaVenc).1 * (((head colaPerd).1 * Libreria.dist(colaPerd,tiempo) / ((head colaVenc).1 * Libreria.dist(colaVenc,tiempo)));
   	end pesoNuevo
+
 
 	// La funcion calcularσ se encarga de calcular el tiempo hasta otro evento de la delta interna (colision o que un elemento llegue 
 	// al final de la cinta)
 	// parametros: la cola del jugador, la cola de la pc y el tiempo actual
 	// retorna: el tiempo hasta una colision entre los primeros elemetos de las cintas o hasta que el primer elemento de alguna cola 
 	// recorra toda la cinta
-	
-	
   	function calcularσ
   		colaJug : List (ℝ x Time), r : colaPc (ℝ x Time) ,tiempo:Time  → res : Time;
   		defcases
   			case
   				res=∞;
-  			if ((colaJug={}) ∧ (colaPc={}))
+  			if ((colaJug={}) ∧ (colaPc={})) //colas vacias
   			case
   				res=(L - Libreria.dist(colaJug,tiempo) / VC);
-  			if (¬(colaJug={}) ∧ (colaPc={}))
+  			if (¬(colaJug={}) ∧ (colaPc={})) //cola pc vacia
   			case
   				res=(L - Libreria.dist(colaJug,tiempo) / VC);
-  			if ((colaJug={}) ∧ ¬(colaPc={}))
+  			if ((colaJug={}) ∧ ¬(colaPc={})) //cola jugador vacia
   			case
   				res=(L - (Libreria.dist(colaJug,tiempo) + Libreria.dist(colaPc,tiempo))) / (2*VC);
-  			if (¬(colaJug={}) ∧ ¬(colaPc={}))
-
-
-
+  			if (¬(colaJug={}) ∧ ¬(colaPc={})) //cola pc vacia
 		end defcases
 	end calcularσ
+
 end Libreria
 
 
