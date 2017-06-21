@@ -1,95 +1,103 @@
 atomic Cinta(params) is (S , X , Y , δint, δext, λ, ta) where
 params is
 	L = 25;    //longitud de la cinta
-	VC = 1;    //velocidad constante
+	VC = 1;    //velocidad de los objetos
 end params
 ------------------------------------------------------------------------------------------------------------------------
 S is
-	tipoCola ==List  (ℝ x Time);    //peso y Libreria.distancia recorrida de cada objeto
-	cJ : tipoCola;       //cola jugador pc
-	cPc : tipoCola;      //cola jugador humano
-	σ : Time;        // σ
+	tipoCola ==List  (ℝ x Time);    //cola que guarda peso y tiempo de arribo de cada objeto
+	cJ : tipoCola;       			//cola pc
+	cPc : tipoCola;      			//cola jugador
+	tiempo : Time; 					//tiempo de ejecucion
+	σ : Time;        				//σ
 end S
 ------------------------------------------------------------------------------------------------------------------------
 X is
-	input1 : ℝ;
-	input2 : ℝ;
+	input1 : ℝ; //LLega objeto de jugador
+	input2 : ℝ; //LLega objeto de pc
 end X
 ---------------------------------------------------------------------------------------------------------------------------
 Y is
-	Llegada == {LlegoJugador, LlegoPc};
+	Llegada == {LlegoJugador, LlegoPc};	
 	Colision == {GanoJugador, GanoPc, Empate} x ℝ x ℝ;
-	out1: Colision;       //indica la llegada de un objeto al final de la cinta
+	out1: Colision;
 	out2: Llegada;   
 end Y
 ---------------------------------------------------------------------------------------------------------------------------
-δint((cJ, cPc, σ)) is 
+δint((cJ, cPc, tiempo, σ)) is 
 	defcases
 		case
+			tiempo = tiempo + σ;
 			tupla :  ℝ x Time; 
-      		tupla.1 = Libreria.pesoNuevo(cJ,cPc);
+      		tupla.1 = Libreria.pesoNuevo(cJ,cPc,tiempo);
       		tupla.2 = (head cJ).2;
       		cJ = (tail cJ)⁀tupla;
 			cPc = (tail cPc);
-			σ = calcularσ(cJ,cPc);
-		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+			σ = Libreria.calcularσ(cJ,cPc,tiempo);
+		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ,tiempo) > Libreria.potencia(cPc,tiempo))
 		case
+			tiempo = tiempo + σ;
 			cJ = tail cJ;
 			tupla :  ℝ x Time; 
-      		tupla.1 = Libreria.pesoNuevo(cPc,cJ);
+      		tupla.1 = Libreria.pesoNuevo(cPc,cJ,tiempo);
       		tupla.2 = (head cpc).2;
       		cPc = (tail cPc)⁀tupla;
-			σ = calcularσ(cJ,cPc);
-		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+			σ = Libreria.calcularσ(cJ,cPc,tiempo);
+		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ,tiempo) > Libreria.potencia(cPc,tiempo))
 		case
+			tiempo = tiempo + σ;
 			cJ = tail cJ;
-			cPc = Libreria.actualizarNuevo(cPc,cJ);
-			σ = calcularσ(cJ,cPc);
-		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ) = Libreria.potencia(cPc))
+			cPc = tail cPc;
+			σ = Libreria.calcularσ(cJ,cPc,tiempo);
+		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ,tiempo) = Libreria.potencia(cPc,tiempo))
 		case
+			tiempo = tiempo + σ;
 			cJ = tail cJ;
 			cPc = cPc;
-			σ = calcularσ(cJ,cPc);
+			σ = Libreria.calcularσ(cJ,cPc,tiempo);
 		if (#cJ>0 ∧ #cPc=0)
 		case
+			tiempo = tiempo + σ;
 			cJ = cJ;
 			cPc = tail cPc;
-			σ = calcularσ(cJ,cPc);
+			σ = Libreria.calcularσ(cJ,cPc,tiempo);
 		if (#cJ=0 ∧ #cPc>0)
 	end defcases
 end δint
 ------
-δext((cJ,cPc,σ), e, (port, value)) is
+δext((cJ,cPc,tiempo,σ), e, (port, value)) is
 	defcases
 		case
+			tiempo = tiempo + e;
 			tupla :  ℝ x Time;
       		tupla.1 = value;
-      		tupla.2 = 0;
+      		tupla.2 = tiempo;
 			cJ= cJ⁀tupla;
 			cPc = cPc;
-			σ=calcularσ(cJ,cPc);
+			σ=calcularσ(cJ,cPc,tiempo);
 		if (port=input1)
 		case
+			tiempo = tiempo + e;
 			tupla :  ℝ x Time;
       		tupla.1 = value; 
-      		tupla.2 = 0; 
+      		tupla.2 = tiempo; 
 			cJ= cJ;
 			cPc = cPc⁀tupla;
-			σ=calcularσ(cJ,cPc);
+			σ=calcularσ(cJ,cPc,tiempo);
 		if (port=input2)
 	end defcases
 end δext
-λ(cJ,cPc, σ) is
+λ(cJ,cPc,tiempo,σ) is
 	defcases
 		case
-			out1 = (GanoJugador, Libreria.pesoNuevo(cJ,cPc), Libreria.dist(cJ));
-		if (¬(cJ={}) ∧ ¬(cPc={})∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+			out1 = (GanoJugador, Libreria.pesoNuevo(cJ,cPc,tiempo+σ), Libreria.dist(cJ,tiempo+σ));
+		if (¬(cJ={}) ∧ ¬(cPc={})∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ))
 		case 
-			out1 = (GanoPc, Libreria.pesoNuevo(cPc,cj), Libreria.dist(cPc)) 
-		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+			out1 = (GanoPc, Libreria.pesoNuevo(cPc,cj,tiempo+σ), Libreria.dist(cPc,tiempo+σ)) 
+		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ))
 		case
 			out1 = (Empate, 0, 0);
-		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ) > Libreria.potencia(cPc))
+		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ))
 		case
 			out2 = LlegoJugador;
 		if (¬(cJ={}) ∧ (cPc={}))
