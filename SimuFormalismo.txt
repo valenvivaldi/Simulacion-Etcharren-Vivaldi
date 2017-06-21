@@ -1,90 +1,87 @@
+
 atomic Cinta(params) is (S , X , Y , δint, δext, λ, ta) where
+
 params is
-	L = 25;    //longitud de la cinta
-	VC = 1;    //velocidad de los objetos
+	L = 25;    								//longitud de la cinta
+	VC = 1;    								//velocidad de los objetos
 end params
-------------------------------------------------------------------------------------------------------------------------
+
 S is
-	tipoCola ==List  (ℝ x Time);    //cola que guarda peso y tiempo de arribo de cada objeto
-	cJ : tipoCola;       			//cola pc
-	cPc : tipoCola;      			//cola jugador
-	tiempo : Time; 					//tiempo de ejecucion
-	σ : Time;        				//σ
+	tipoCola ==List  (ℝ x Time);    		//cola que guarda peso y tiempo de arribo de cada objeto
+	cJ : tipoCola;       					//cola pc
+	cPc : tipoCola;      					//cola jugador
+	tiempo : Time; 							//tiempo de ejecucion
+	σ : Time;        						//σ
 end S
-------------------------------------------------------------------------------------------------------------------------
+
 X is
-	input1 : ℝ; //LLega objeto de jugador
-	input2 : ℝ; //LLega objeto de pc
+	input1 : ℝ; 							//LLega objeto de jugador, con su peso
+	input2 : ℝ; 							//LLega objeto de pc, con su peso
 end X
----------------------------------------------------------------------------------------------------------------------------
+
 Y is
-	Llegada == {LlegoJugador, LlegoPc};	
+	Llegada == {LlegoJugador, LlegoPc};
 	Colision == {GanoJugador, GanoPc, Empate} x ℝ x ℝ;
-	out1: Colision;
-	out2: Llegada;   
+	out1: Colision; 						//puerto de salida colision
+	out2: Llegada;  						//puerto de salida cuando un objeto llega al final de la cinta 
 end Y
----------------------------------------------------------------------------------------------------------------------------
+
 δint((cJ, cPc, tiempo, σ)) is 
 	defcases
 		case
-			tiempo = tiempo + σ;
-			tupla :  ℝ x Time; 
-      		tupla.1 = Libreria.pesoNuevo(cJ,cPc,tiempo);
-      		tupla.2 = (head cJ).2;
-      		cJ = (tail cJ)⁀tupla;
-			cPc = (tail cPc);
-			σ = Libreria.calcularσ(cJ,cPc,tiempo);
-		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ,tiempo) > Libreria.potencia(cPc,tiempo))
+			tiempo = tiempo + σ; 								//se actualiza el tiempo de ejecucion
+      		(head cJ).1 = Libreria.pesoNuevo(cJ,cPc,tiempo); 	//se actualiza el peso del objeto de la cabeza de la cola ganadora 
+			cPc = (tail cPc); 									//se saca el objeto que perdio la colision 
+			σ = Libreria.calcularσ(cJ,cPc,tiempo); 				//se calcula el nuevo sigma
+		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo) > Libreria.potencia(cPc,tiempo)) 	//gana colision jugador
 		case
-			tiempo = tiempo + σ;
-			cJ = tail cJ;
-			tupla :  ℝ x Time; 
-      		tupla.1 = Libreria.pesoNuevo(cPc,cJ,tiempo);
-      		tupla.2 = (head cpc).2;
-      		cPc = (tail cPc)⁀tupla;
-			σ = Libreria.calcularσ(cJ,cPc,tiempo);
-		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ,tiempo) > Libreria.potencia(cPc,tiempo))
+			tiempo = tiempo + σ;								//se actualiza el tiempo de ejecucion
+			cJ = tail cJ;										//se saca el objeto que perdio la colision
+      		(head cPc).1 = Libreria.pesoNuevo(cPc,cJ,tiempo);	//se actualiza el peso del objeto de la cabeza de la cola ganadora
+			σ = Libreria.calcularσ(cJ,cPc,tiempo);				//se calcula el nuevo sigma
+		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo) > Libreria.potencia(cPc,tiempo)) 	//gana colision pc
 		case
-			tiempo = tiempo + σ;
-			cJ = tail cJ;
-			cPc = tail cPc;
+			tiempo = tiempo + σ;								//se actualiza el tiempo de ejecucion
+			cJ = tail cJ;										//se saca el objeto que empate la colision 
+			cPc = tail cPc;										//se saca el objeto que empate la colision
 			σ = Libreria.calcularσ(cJ,cPc,tiempo);
-		if (#cJ>0 ∧ #cPc>0 ∧ Libreria.potencia(cJ,tiempo) = Libreria.potencia(cPc,tiempo))
+		if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo) = Libreria.potencia(cPc,tiempo)) 	//empate colision
 		case
-			tiempo = tiempo + σ;
-			cJ = tail cJ;
+			tiempo = tiempo + σ;								//se actualiza el tiempo de ejecucion
+			cJ = tail cJ;										//se saca el objeto que llego al final de la cinta
 			cPc = cPc;
 			σ = Libreria.calcularσ(cJ,cPc,tiempo);
-		if (#cJ>0 ∧ #cPc=0)
+		if (¬(cJ={}) ∧ (cPc={})) 								//llega objeto jugador al final de la cinta
 		case
-			tiempo = tiempo + σ;
-			cJ = cJ;
-			cPc = tail cPc;
-			σ = Libreria.calcularσ(cJ,cPc,tiempo);
-		if (#cJ=0 ∧ #cPc>0)
+			tiempo = tiempo + σ;								//se actualiza el tiempo de ejecucion
+			cJ = cJ;										
+			cPc = tail cPc;										//se saca el objeto que llego al final de la cinta
+			σ = Libreria.calcularσ(cJ,cPc,tiempo);				//se calcula el nuevo sigma
+		if ((cJ={}) ∧ ¬(cPc={})) 								//llega objeto pc al final de la cinta
 	end defcases
 end δint
-------
+
+
 δext((cJ,cPc,tiempo,σ), e, (port, value)) is
 	defcases
 		case
-			tiempo = tiempo + e;
-			tupla :  ℝ x Time;
+			tiempo = tiempo + e;			//se actuliza el tiempo
+			tupla :  ℝ x Time;				//se crea tupla
       		tupla.1 = value;
       		tupla.2 = tiempo;
-			cJ= cJ⁀tupla;
+			cJ= cJ⁀tupla;					//agrega elemento a la cola jugador
 			cPc = cPc;
-			σ=calcularσ(cJ,cPc,tiempo);
-		if (port=input1)
+			σ=calcularσ(cJ,cPc,tiempo);		//se calcula el sigma
+		if (port=input1) 					//llega objeto jugador
 		case
-			tiempo = tiempo + e;
-			tupla :  ℝ x Time;
-      		tupla.1 = value; 
+			tiempo = tiempo + e; 			//actualiza tiempo
+			tupla :  ℝ x Time; 				//se crea tupla
+      		tupla.1 = value;		
       		tupla.2 = tiempo; 
 			cJ= cJ;
-			cPc = cPc⁀tupla;
-			σ=calcularσ(cJ,cPc,tiempo);
-		if (port=input2)
+			cPc = cPc⁀tupla; 				//agrega elemento a la cola pc
+			σ=calcularσ(cJ,cPc,tiempo);		//se calcula el nuevo sigma
+		if (port=input2) 					//llega objeto pc
 	end defcases
 end δext
 λ(cJ,cPc,tiempo,σ) is
