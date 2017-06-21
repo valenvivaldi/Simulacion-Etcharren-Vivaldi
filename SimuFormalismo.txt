@@ -104,28 +104,48 @@ end δext
 	end defcases
 end λ
 
-ta(cJ,cPc, σ) is
-σ;
+ta(cJ,cPc,tiempo, σ) is
+	σ;
 end ta
 
 end atomic
 
 functions Libreria is
+
+	// La funcion dist, devuelve la distancia que lleva recorrida el primer elemento de la cola
+	// parametros: la cola y el tiempo actual
+	
 	function dist is
 		cola : List (ℝ x Time) , tiempo: Time → res : ℝ;
 		res = ((tiempo - (head c).2) * Vc);
 	end dist
+
+	// La funcion potencia devuelve la potencia de choque del objeto, valor utilizado para la comparacion ante una colision
+	// parametros: la cola y el tiempo actual
+	// retorna: La potencia del primer elemento de la cola
 	
 	function potencia is
 		cola : List (ℝ x Time),tiempo:Time → res : ℝ;
 		res = (head c).1 * Libreria.dist(cola,tiempo);
 	end potencia
 	
+	
+	// La funcion pesoNuevo devuelve el peso del elemento ganador de la colision, el cual sufre una reduccion de peso
+	// parametros: la cola ganadora, la cola perdedora y el tiempo actual
+	// retorna: El peso nuevo del primer objeto de la cola vencedora, luego de colisionar con el primer objeto de la cola perdedora
+	
 	function pesoNuevo
 		colaVenc : List (ℝ x Time), r : colaPerd (ℝ x Time) ,tiempo:Time → res : ℝ;
 		res = (head colaVenc).1 * (((head colaPerd).1 * Libreria.dist(colaPerd,tiempo) / ((head colaVenc).1 * Libreria.dist(colaVenc,tiempo)));
   	end pesoNuevo
 
+	// La funcion calcularσ se encarga de calcular el tiempo hasta otro evento de la delta interna (colision o que un elemento llegue 
+	// al final de la cinta)
+	// parametros: la cola del jugador, la cola de la pc y el tiempo actual
+	// retorna: el tiempo hasta una colision entre los primeros elemetos de las cintas o hasta que el primer elemento de alguna cola 
+	// recorra toda la cinta
+	
+	
   	function calcularσ
   		colaJug : List (ℝ x Time), r : colaPc (ℝ x Time) ,tiempo:Time  → res : Time;
   		defcases
