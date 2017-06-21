@@ -1,6 +1,7 @@
 
 Autores:Valentin Vivaldi y Leandro Javier Etcharren
-fomalismo utilizado:cml-devs
+formalismo utilizado:cml-devs
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 El archivo Cinta.txt contiene la especificacion de un devs que representa
