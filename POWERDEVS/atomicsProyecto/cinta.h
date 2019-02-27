@@ -21,12 +21,17 @@ int vc;
 
 //State
 //colas que guarda peso y tiempo de arribo de cada objeto
-std::list<double[2]> cJ;
-std::list<double[2]> cPc;
+std::list<std::pair<double,double> > cJ;
+std::list<std::pair<double,double> > cPc;
 //tiempo de ejecucion
 double time;
 
 double sigma;
+
+
+
+
+
 
 
 

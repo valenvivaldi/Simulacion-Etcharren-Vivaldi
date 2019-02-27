@@ -1,12 +1,13 @@
 #include <iostream>
 #include <list>
-#define INFINITE 999999999
 
 
-double calcularsigma(std::list<double[2]> colaJug , std::list<double[2]> colaPc,double time);
 
-double pesoNuevo(std::list<double[2]> colaVenc , std::list<double[2]> colaPerd , double time);
 
-double potencia(std::list<double[2]> cola ,double time);
+double calcularsigma(std::list<std::pair<double,double> >colaJug , std::list<std::pair<double,double> >colaPc,double time);
 
-double dist(std::list<double[2]> cola ,double time);
+double pesoNuevo(std::list<std::pair<double,double> >colaVenc , std::list<std::pair<double,double> >colaPerd , double time);
+
+double potencia(std::list<std::pair<double,double> >cola ,double time);
+
+double dist(std::list<std::pair<double,double> >cola ,double time);

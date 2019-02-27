@@ -58,11 +58,11 @@ Coupled
             {
             Name = Cinta
             Ports = 2 ; 2
-            Path = 
+            Path = atomicsProyecto/cinta.h
             Description = Atomic DEVS model
             Graphic
                 {
-                Position = -5250 ; -3900
+                Position = -5325 ; -3525
                 Dimension = 1200 ; 2265
                 Direction = Down
                 Color = 15
@@ -70,6 +70,8 @@ Coupled
                 }
             Parameters
                 {
+                l = Val; 25 ; 
+                vc = Val; 0 ; 
                 }
             }
         Atomic
@@ -101,7 +103,7 @@ Coupled
             {
             Name = Contador
             Ports = 2 ; 1
-            Path = 
+            Path = atomicsProyecto/contador.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -119,50 +121,50 @@ Coupled
             {
             Source = Cmp ;  2 ;  1 ; 0
             Sink = Cmp ;  3 ;  2 ; -1
-            PointX = -2475 ; -4125 ; -4125
-            PointY = -4125 ; -4125 ; -3540
+            PointX = -2475 ; -4200 ; -4200
+            PointY = -4125 ; -4125 ; -3165
             }
         Line
             {
             Source = Cmp ;  1 ;  1 ; 0
             Sink = Cmp ;  3 ;  1 ; -1
-            PointX = -7500 ; -5175 ; -5175
-            PointY = -4125 ; -4125 ; -3540
+            PointX = -7500 ; -5250 ; -5250
+            PointY = -4125 ; -4125 ; -3165
             }
         Line
             {
             Source = Cmp ;  3 ;  1 ; 0
             Sink = Cmp ;  5 ;  1 ; -1
-            PointX = -5175 ; -5175 ; -4800 ; -4800
-            PointY = -2025 ; -1425 ; -1425 ; -465
+            PointX = -5250 ; -4800 ; -4800
+            PointY = -1650 ; -1650 ; -465
             }
         Line
             {
             Source = Cmp ;  3 ;  2 ; 0
             Sink = Cmp ;  5 ;  2 ; -1
-            PointX = -4125 ; -4125 ; -4500 ; -4500
-            PointY = -2025 ; -1425 ; -1425 ; -465
+            PointX = -4200 ; -4500 ; -4500
+            PointY = -1650 ; -1650 ; -465
             }
         Line
             {
             Source = Cmp ;  3 ;  1 ; 0
             Sink = Cmp ;  2 ;  1 ; -1
-            PointX = -5175 ; -5175 ; -9300 ; -9300 ; -1425 ; -1425 ; -1560
-            PointY = -2025 ; -1200 ; -1200 ; -5250 ; -5250 ; -4275 ; -4275
+            PointX = -5250 ; -9300 ; -9300 ; -1425 ; -1425 ; -1560
+            PointY = -1650 ; -1650 ; -5250 ; -5250 ; -4275 ; -4275
             }
         Line
             {
             Source = Cmp ;  3 ;  2 ; 0
             Sink = Cmp ;  2 ;  2 ; -1
-            PointX = -4125 ; -4125 ; -1425 ; -1425 ; -1560
-            PointY = -2025 ; -1200 ; -1200 ; -3975 ; -3975
+            PointX = -4200 ; -1425 ; -1425 ; -1560
+            PointY = -1650 ; -1650 ; -3975 ; -3975
             }
         Line
             {
             Source = Cmp ;  5 ;  1 ; 0
             Sink = Cmp ;  4 ;  1 ; -1
             PointX = -4650 ; -4650 ; -4650
-            PointY = 450 ; 1485 ; 1485
+            PointY = 450 ; 450 ; 1485
             }
         }
     }
