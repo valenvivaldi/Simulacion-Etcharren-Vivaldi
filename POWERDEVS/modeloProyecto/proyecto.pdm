@@ -1,0 +1,42 @@
+Coupled
+    {
+    Type = Root
+    Name = proyecto
+    Ports = 0; 0
+    Description = 
+    Graphic
+        {
+        Position = 0; 0
+        Dimension = 600; 600
+        Direction = Right
+        Color = 15
+        Icon = 
+        Window = 5000; 5000; 5000; 5000
+        }
+    Parameters
+        {
+        }
+    System
+        {
+        Atomic
+            {
+            Name = Cinta
+            Ports = 2 ; 2
+            Path = atomicsProyecto/cinta.h
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -9255 ; -4080
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = None
+                }
+            Parameters
+                {
+                l = Val; 25 ; 
+                vc = Val; 1 ; 
+                }
+            }
+        }
+    }

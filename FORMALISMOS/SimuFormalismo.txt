@@ -25,15 +25,15 @@ Y is
     Llegada == {LlegoJugador, LlegoPc};
     Colision == {GanoJugador, GanoPc, Empate} x ℝ x ℝ;
     out1: Colision;                         //puerto de salida colision
-    out2: Llegada;                          //puerto de salida cuando un objeto llega al final de la cinta 
+    out2: Llegada;                          //puerto de salida cuando un objeto llega al final de la cinta
 end Y
 
-δint((cJ, cPc, tiempo, σ)) is 
+δint((cJ, cPc, tiempo, σ)) is
     defcases
         case
             tiempo = tiempo + σ;                                //se actualiza el tiempo de ejecucion
-            (head cJ).1 = Libreria.pesoNuevo(cJ,cPc,tiempo);    //se actualiza el peso del objeto de la cabeza de la cola ganadora 
-            cPc = (tail cPc);                                   //se saca el objeto que perdio la colision 
+            (head cJ).1 = Libreria.pesoNuevo(cJ,cPc,tiempo);    //se actualiza el peso del objeto de la cabeza de la cola ganadora
+            cPc = (tail cPc);                                   //se saca el objeto que perdio la colision
             σ = Libreria.calcularσ(cJ,cPc,tiempo);              //se calcula el nuevo sigma
         if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo) > Libreria.potencia(cPc,tiempo))    //gana colision jugador
         case
@@ -44,7 +44,7 @@ end Y
         if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo) > Libreria.potencia(cPc,tiempo))    //gana colision pc
         case
             tiempo = tiempo + σ;                                //se actualiza el tiempo de ejecucion
-            cJ = tail cJ;                                       //se saca el objeto que empate la colision 
+            cJ = tail cJ;                                       //se saca el objeto que empate la colision
             cPc = tail cPc;                                     //se saca el objeto que empate la colision
             σ = Libreria.calcularσ(cJ,cPc,tiempo);
         if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo) = Libreria.potencia(cPc,tiempo))    //empate colision
@@ -56,7 +56,7 @@ end Y
         if (¬(cJ={}) ∧ (cPc={}))                                //llega objeto jugador al final de la cinta
         case
             tiempo = tiempo + σ;                                //se actualiza el tiempo de ejecucion
-            cJ = cJ;                                        
+            cJ = cJ;
             cPc = tail cPc;                                     //se saca el objeto que llego al final de la cinta
             σ = Libreria.calcularσ(cJ,cPc,tiempo);              //se calcula el nuevo sigma
         if ((cJ={}) ∧ ¬(cPc={}))                                //llega objeto pc al final de la cinta
@@ -78,8 +78,8 @@ end δint
         case
             tiempo = tiempo + e;            //actualiza tiempo
             tupla :  ℝ x Time;              //se crea tupla
-            tupla.1 = value;        
-            tupla.2 = tiempo; 
+            tupla.1 = value;
+            tupla.2 = tiempo;
             cJ= cJ;
             cPc = cPc⁀tupla;                //agrega elemento a la cola pc
             σ=calcularσ(cJ,cPc,tiempo);     //se calcula el nuevo sigma
@@ -93,8 +93,8 @@ end δext
         case
             out1 = (GanoJugador, Libreria.pesoNuevo(cJ,cPc,tiempo+σ), Libreria.dist(cJ,tiempo+σ));
         if (¬(cJ={}) ∧ ¬(cPc={})∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ)) //gano colision jugador
-        case 
-            out1 = (GanoPc, Libreria.pesoNuevo(cPc,cj,tiempo+σ), Libreria.dist(cPc,tiempo+σ)) 
+        case
+            out1 = (GanoPc, Libreria.pesoNuevo(cPc,cj,tiempo+σ), Libreria.dist(cPc,tiempo+σ))
         if (¬(cJ={}) ∧ ¬(cPc={}) ∧ Libreria.potencia(cJ,tiempo+σ) > Libreria.potencia(cPc,tiempo+σ)) //gano colision pc
         case
             out1 = (Empate, 0, 0);
@@ -133,8 +133,8 @@ functions Libreria is
         cola : List (ℝ x Time),tiempo:Time → res : ℝ;
         res = (head c).1 * Libreria.dist(cola,tiempo);
     end potencia
-    
-    
+
+
     // La funcion pesoNuevo devuelve el peso del elemento ganador de la colision, el cual sufre una reduccion de peso
     // parametros: la cola ganadora, la cola perdedora y el tiempo actual
     // retorna: El peso nuevo del primer objeto de la cola vencedora, luego de colisionar con el primer objeto de la cola perdedora
@@ -144,10 +144,10 @@ functions Libreria is
     end pesoNuevo
 
 
-    // La funcion calcularσ se encarga de calcular el tiempo hasta otro evento de la delta interna (colision o que un elemento llegue 
+    // La funcion calcularσ se encarga de calcular el tiempo hasta otro evento de la delta interna (colision o que un elemento llegue
     // al final de la cinta)
     // parametros: la cola del jugador, la cola de la pc y el tiempo actual
-    // retorna: el tiempo hasta una colision entre los primeros elemetos de las cintas o hasta que el primer elemento de alguna cola 
+    // retorna: el tiempo hasta una colision entre los primeros elemetos de las cintas o hasta que el primer elemento de alguna cola
     // recorra toda la cinta
     function calcularσ
         colaJug : List (ℝ x Time), r : colaPc (ℝ x Time) ,tiempo:Time  → res : Time;
@@ -163,17 +163,8 @@ functions Libreria is
             if ((colaJug={}) ∧ ¬(colaPc={})) //cola jugador vacia
             case
                 res=(L - (Libreria.dist(colaJug,tiempo) + Libreria.dist(colaPc,tiempo))) / (2*VC);
-            if (¬(colaJug={}) ∧ ¬(colaPc={})) //cola pc vacia
+            if (¬(colaJug={}) ∧ ¬(colaPc={})) //ninguna cola vacia
         end defcases
     end calcularσ
 
 end Libreria
-
-
-
-
-
-
-
-
-
