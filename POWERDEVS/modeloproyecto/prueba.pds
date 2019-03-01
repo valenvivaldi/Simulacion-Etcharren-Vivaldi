@@ -1,0 +1,39 @@
+Root-Coordinator
+ {
+  Simulator
+   {
+    Path = atomicosproyecto/cinta.h
+    Parameters = 2.500000e+01,1.000000e+00
+   }
+  Simulator
+   {
+    Path = atomicosproyecto/contador.h
+    Parameters = 
+   }
+  Simulator
+   {
+    Path = sinks/gnuplot.h
+    Parameters = 3.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Plot'","with lines title 'First output'","","","",""
+   }
+  Simulator
+   {
+    Path = sinks/gnuplot.h
+    Parameters = 2.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Plot'","with lines title 'First output'","","","",""
+   }
+  EIC
+   {
+   }
+  EOC
+   {
+   }
+  IC
+   {
+    (0,0);(1,0)
+    (0,1);(1,1)
+    (1,0);(2,0)
+    (1,1);(2,1)
+    (1,2);(2,2)
+    (1,3);(3,0)
+    (1,4);(3,1)
+   }
+ }

@@ -1,0 +1,159 @@
+Coupled
+    {
+    Type = Root
+    Name = Model 01121
+    Ports = 0; 0
+    Description = 
+    Graphic
+        {
+        Position = 0; 0
+        Dimension = 600; 600
+        Direction = Right
+        Color = 15
+        Icon = 
+        Window = 5000; 5000; 5000; 5000
+        }
+    Parameters
+        {
+        }
+    System
+        {
+        Atomic
+            {
+            Name = Cinta
+            Ports = 2 ; 2
+            Path = atomicosproyecto/cinta.h
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -6480 ; -2880
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = None
+                }
+            Parameters
+                {
+                l = Val; 25 ; 
+                vc = Val; 1 ; 
+                }
+            }
+        Atomic
+            {
+            Name = Contador
+            Ports = 2 ; 5
+            Path =atomicosproyecto/contador.h
+            Description = Atomic DEVS model
+            Graphic
+                {
+                Position = -4080 ; -2925
+                Dimension = 675 ; 750
+                Direction = Right
+                Color = 15
+                Icon = None
+                }
+            Parameters
+                {
+                }
+            }
+        Atomic
+            {
+            Name = GnuPlot0
+            Ports = 3 ; 0
+            Path = sinks/gnuplot.h
+            Description = Plot input signal using GnuPlot
+            Graphic
+                {
+                Position = -480 ; -3030
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = %sinks%gnuplot.svg
+                }
+            Parameters
+                {
+                Inputs = Str; %Inputs ; Number of inputs
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
+                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
+                Format2 = Str;  ; Formatting options for input 2
+                Format3 = Str;  ; Formatting options for input 3
+                Format4 = Str;  ; Formatting options for input 4
+                Format5 = Str;  ; Formatting options for input 5
+                }
+            }
+        Atomic
+            {
+            Name = GnuPlot1
+            Ports = 2 ; 0
+            Path = sinks/gnuplot.h
+            Description = Plot input signal using GnuPlot
+            Graphic
+                {
+                Position = -480 ; -1605
+                Dimension = 675 ; 675
+                Direction = Right
+                Color = 15
+                Icon = %sinks%gnuplot.svg
+                }
+            Parameters
+                {
+                Inputs = Str; %Inputs ; Number of inputs
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
+                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
+                Format2 = Str;  ; Formatting options for input 2
+                Format3 = Str;  ; Formatting options for input 3
+                Format4 = Str;  ; Formatting options for input 4
+                Format5 = Str;  ; Formatting options for input 5
+                }
+            }
+        Line
+            {
+            Source = Cmp ;  1 ;  1 ; 0
+            Sink = Cmp ;  2 ;  1 ; -1
+            PointX = -5700 ; -5700 ; -4215
+            PointY = -2700 ; -2700 ; -2700
+            }
+        Line
+            {
+            Source = Cmp ;  1 ;  2 ; 0
+            Sink = Cmp ;  2 ;  2 ; -1
+            PointX = -5700 ; -5700 ; -4215
+            PointY = -2400 ; -2400 ; -2400
+            }
+        Line
+            {
+            Source = Cmp ;  2 ;  1 ; 0
+            Sink = Cmp ;  3 ;  1 ; -1
+            PointX = -3300 ; -3300 ; -615
+            PointY = -2850 ; -2850 ; -2850
+            }
+        Line
+            {
+            Source = Cmp ;  2 ;  2 ; 0
+            Sink = Cmp ;  3 ;  2 ; -1
+            PointX = -3300 ; -3300 ; -615
+            PointY = -2700 ; -2700 ; -2700
+            }
+        Line
+            {
+            Source = Cmp ;  2 ;  3 ; 0
+            Sink = Cmp ;  3 ;  3 ; -1
+            PointX = -3300 ; -3300 ; -615 ; -615
+            PointY = -2550 ; -2550 ; -2550 ; -2475
+            }
+        Line
+            {
+            Source = Cmp ;  2 ;  4 ; 0
+            Sink = Cmp ;  4 ;  1 ; -1
+            PointX = -3300 ; -1875 ; -1875 ; -615
+            PointY = -2400 ; -2400 ; -1425 ; -1425
+            }
+        Line
+            {
+            Source = Cmp ;  2 ;  5 ; 0
+            Sink = Cmp ;  4 ;  2 ; -1
+            PointX = -3300 ; -2025 ; -2025 ; -615
+            PointY = -2250 ; -2250 ; -1125 ; -1125
+            }
+        }
+    }
