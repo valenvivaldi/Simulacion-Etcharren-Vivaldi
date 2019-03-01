@@ -1,4 +1,4 @@
-//CPP:atomicsProyecto/cinta.cpp
+//CPP:atomicsproyecto/cinta.cpp
 #if !defined cinta_h
 #define cinta_h
 

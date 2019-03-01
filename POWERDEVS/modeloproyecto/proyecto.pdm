@@ -22,7 +22,7 @@ Coupled
             {
             Name = Cinta
             Ports = 2 ; 2
-            Path = atomicsProyecto/cinta.h
+            Path = atomicsproyecto/cinta.h
             Description = Atomic DEVS model
             Graphic
                 {

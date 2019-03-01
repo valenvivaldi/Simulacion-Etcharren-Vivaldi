@@ -1,4 +1,4 @@
-//CPP:atomicsProyecto/contador.cpp
+//CPP:atomicsproyecto/contador.cpp
 #if !defined contador_h
 #define contador_h
 

@@ -58,7 +58,7 @@ Coupled
             {
             Name = Cinta
             Ports = 2 ; 2
-            Path = atomicsProyecto/cinta.h
+            Path = atomicsproyecto/cinta.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -103,7 +103,7 @@ Coupled
             {
             Name = Contador
             Ports = 2 ; 1
-            Path = atomicsProyecto/contador.h
+            Path = atomicsproyecto/contador.h
             Description = Atomic DEVS model
             Graphic
                 {
