@@ -29,7 +29,8 @@ double time;
 double sigma;
 
 
-
+int value1[3]; //stores the value to return in the event of a collision (only sent through port 0)
+int value2; //stores the value to return in the case that the end of the tape is reached (only sent through port 1)
 
 
 

@@ -4,6 +4,9 @@
 #include <iostream>
 #include <list>
 #include <limits>
+#include "simulator.h"
+#include "event.h"
+#include "stdarg.h"
 
 double calcularsigma(std::list< std::pair<double,double> >colaJug  , std::list< std::pair<double,double> > colaPc , double time, double l, double vc);
 
