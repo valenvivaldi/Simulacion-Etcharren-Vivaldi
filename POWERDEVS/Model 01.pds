@@ -1,0 +1,23 @@
+Root-Coordinator
+ {
+  Simulator
+   {
+    Path = atomicosproyecto/simplegenerator.h
+    Parameters = 
+   }
+  Simulator
+   {
+    Path = sinks/gnuplot.h
+    Parameters = 1.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Plot'","with lines title 'First output'","","","",""
+   }
+  EIC
+   {
+   }
+  EOC
+   {
+   }
+  IC
+   {
+    (0,0);(1,0)
+   }
+ }

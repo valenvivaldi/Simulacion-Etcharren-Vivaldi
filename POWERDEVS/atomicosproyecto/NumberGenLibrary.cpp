@@ -1,4 +1,4 @@
-#include <NumberGenLibrary.h>
+#include "NumberGenLibrary.h"
 
 std::vector<double> genExponentialDistribution(double mean, int qty){
     std::vector<double> arrExp;

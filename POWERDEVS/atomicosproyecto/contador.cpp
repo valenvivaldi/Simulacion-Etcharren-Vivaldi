@@ -27,9 +27,9 @@ void contador::dext(Event x, double t) {
         if(x.port==0) { //port of colitions (arrays of double)
                 double* collition =(double*)x.value;
                 switch ((int)collition[0]) {
-                case 1: colWinJ++;portEmit=0;
-                case 0: colTie++;portEmit=1;
-                case -1: colWinPc++;portEmit=2;
+                	case 1: colWinJ++;portEmit=0;break;
+                	case 0: colTie++;portEmit=1;break;
+                	case -1: colWinPc++;portEmit=2;break;
 
                 }
 
@@ -54,11 +54,11 @@ Event contador::lambda(double t) {
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
 switch(portEmit){
-case 0:return Event(&colWinJ,portEmit);
-case 1:return Event(&colWinPc,portEmit);
-case 2:return Event(&colTie,portEmit);
-case 3:return Event(&arrivalPc,portEmit);
-case 4:return Event(&arrivalJ,portEmit);
+	case 0:return Event(&colWinJ,portEmit);break;
+	case 1:return Event(&colWinPc,portEmit);break;
+	case 2:return Event(&colTie,portEmit);break;
+	case 3:return Event(&arrivalPc,portEmit);break;
+	case 4:return Event(&arrivalJ,portEmit);break;
 }
 
         return Event();
