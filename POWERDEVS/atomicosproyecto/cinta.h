@@ -1,3 +1,4 @@
+//CPP:atomicosproyecto/Library.cpp
 //CPP:atomicosproyecto/cinta.cpp
 #if !defined cinta_h
 #define cinta_h
@@ -6,7 +7,7 @@
 #include "event.h"
 #include "stdarg.h"
 
-#include "Library.h"
+#include "atomicosproyecto/Library.h"
 
 
 class cinta: public Simulator { 
