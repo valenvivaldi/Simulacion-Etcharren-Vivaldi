@@ -10,33 +10,21 @@ va_start(parameters,t);
 strategy =(int) va_arg(parameters, double);
 quantity = (int)va_arg(parameters, double);
 
-			printLog("inicio init strategy %d \n",strategy);
-
 switch(strategy){
 case 1:
 		weights=genExponentialDistribution(7.5,quantity);
 		interarrivals=genExponentialDistribution(10,quantity-1);
-		std::sort(weights.begin(),weights.end());
+		//std::sort(weights.begin(),weights.end());
 		break;
 default:
-			weights = genUniformDistribution(6,8,quantity);
-			interarrivals=genExponentialDistribution(10,quantity-1);
-			printLog("entrodefault! \n");
-break;
+		weights = genUniformDistribution(6,8,quantity);
+		interarrivals=genExponentialDistribution(10,quantity-1);
+		break;
 }
 
-sigma=2;
+sigma=0;
 dispatched=0;
-printLog("w %d \n",weights.size());
-printLog("intrr%d \n",interarrivals.size());
-printLog("termino init disp %d quan %d\n",dispatched,quantity);
-double n;
-for (std::vector <double>::iterator it=interarrivals.begin(); it != interarrivals.end(); ++it){
-        n += *it;
-       
 
-    };
-printLog("media %g",n/99);
 
 }
 double generator::ta(double t) {
@@ -44,16 +32,12 @@ double generator::ta(double t) {
 return sigma;
 }
 void generator::dint(double t) {
-printLog("inicia interna \n");
-
 if(dispatched < quantity){
-			printLog("despacho! \n");
 sigma = interarrivals.back();
 interarrivals.pop_back();
-dispatched++;
-			printLog("termino int \n");
 }else{
-exit();
+sigma=10e10;
+ //exit();
 }
 
 }
@@ -71,15 +55,18 @@ Event generator::lambda(double t) {
 //where:
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
-			printLog("output \n");
-double aux= weights.back();
-weights.pop_back();
-			printLog("termino output! \n");
-return Event(&aux,0);
+if(dispatched < quantity){
+	aux= weights.back();
+	weights.pop_back();
+	dispatched++;
+	return Event(&aux,0);
+}
+else{
+	//exit();
+}
 
 }
 void generator::exit() {
 
-printLog("exit\n");//Code executed at the end of the simulation.
 
 }
