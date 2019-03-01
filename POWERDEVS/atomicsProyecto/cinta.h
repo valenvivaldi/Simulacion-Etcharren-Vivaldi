@@ -1,4 +1,3 @@
-//CPP:royecto.cpp
 //CPP:atomicsproyecto/cinta.cpp
 #if !defined cinta_h
 #define cinta_h
@@ -10,7 +9,7 @@
 #include "Library.h"
 
 
-class cinta: public Simulator { 
+class cinta: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
