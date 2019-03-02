@@ -16,9 +16,8 @@ class cinta: public Simulator {
 // and parameters
 
 //parameters
-int l;
-int vc;
-
+double l;
+double vc;
 //State
 //colas que guarda peso y tiempo de arribo de cada objeto
 std::list<std::pair<double,double> > cJ;
@@ -29,8 +28,8 @@ double time;
 double sigma;
 
 
-int value1[3]; //stores the value to return in the event of a collision (only sent through port 0)
-int value2; //stores the value to return in the case that the end of the tape is reached (only sent through port 1)
+double value1[3]; //stores the value to return in the event of a collision (only sent through port 0)
+double value2; //stores the value to return in the case that the end of the tape is reached (only sent through port 1)
 
 
 

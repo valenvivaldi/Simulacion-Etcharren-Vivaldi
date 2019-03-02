@@ -16,4 +16,6 @@ double potencia(std::list< std::pair<double,double> > cola , double time,double 
 
 double dist(std::list< std::pair<double,double> > cola , double time,double vc);
 
+void mostrarCola (std::list< std::pair<double,double> > cola);
+
 #endif

@@ -24,6 +24,7 @@ int arrivalPc;
 int arrivalJ;
 
 int portEmit;
+double aux;
 	
 double sigma;
 public:
