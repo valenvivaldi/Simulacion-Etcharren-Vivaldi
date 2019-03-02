@@ -21,6 +21,39 @@ std::list<double> genUniformDistribution(double min, double max, int qty){
     }
     return arrUn;
 };
+
+void printLogList(std::list<double> a){
+	std::list<double>::iterator it;
+	printLog("lista:{");
+	for(it = a.begin(); it != a.end(); ++it){
+		printLog("%g,",*it);
+	}
+	printLog("lista:}\n");
+}
+
+std::list<double> interleaved(std::list<double> a){
+    std::list<double> res;
+    //printLogList(a);
+    bool i=0;
+    while(!a.empty()){
+		if(i){
+				res.push_back(a.front());
+				a.pop_front();
+				i=!i;
+		}else{
+				res.push_back(a.back());
+				a.pop_back();
+				i=!i;
+		}
+	}
+   
+    //printLogList(res);
+    return res;
+};
+
+
+
+
 /*
 int main(void){
     std::list <double> mylist =  genUniformDistribution(6,90,30);

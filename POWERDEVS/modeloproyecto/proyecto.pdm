@@ -54,34 +54,9 @@ Coupled
                 {
                 Inputs = Str; %Inputs ; Number of inputs
                 Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
-                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
-                Format2 = Str;  ; Formatting options for input 2
-                Format3 = Str;  ; Formatting options for input 3
-                Format4 = Str;  ; Formatting options for input 4
-                Format5 = Str;  ; Formatting options for input 5
-                }
-            }
-        Atomic
-            {
-            Name = Llegadas
-            Ports = 2 ; 0
-            Path = sinks/gnuplot.h
-            Description = Plot input signal using GnuPlot
-            Graphic
-                {
-                Position = -3405 ; -3630
-                Dimension = 675 ; 675
-                Direction = Right
-                Color = 15
-                Icon = %sinks%gnuplot.svg
-                }
-            Parameters
-                {
-                Inputs = Str; %Inputs ; Number of inputs
-                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
-                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
-                Format2 = Str;  ; Formatting options for input 2
-                Format3 = Str;  ; Formatting options for input 3
+                Format1 = Str; with lines title 'Colisiones ganadas por Jugador' ; Formatting options for input 1
+                Format2 = Str; with lines title 'Colisiones ganadas por PC' ; Formatting options for input 2
+                Format3 = Str; with lines title 'Colisiones empatadas' ; Formatting options for input 3
                 Format4 = Str;  ; Formatting options for input 4
                 Format5 = Str;  ; Formatting options for input 5
                 }
@@ -102,6 +77,8 @@ Coupled
                 }
             Parameters
                 {
+                l = Val; 25 ; 
+                vc = Val; 1 ; 
                 }
             }
         Atomic
@@ -126,13 +103,13 @@ Coupled
             }
         Atomic
             {
-            Name = Player
+            Name = Jugador
             Ports = 0 ; 1
             Path = atomicosproyecto/generator.h
             Description = Atomic DEVS model
             Graphic
                 {
-                Position = -13380 ; -3405
+                Position = -13380 ; -3855
                 Dimension = 675 ; 675
                 Direction = Right
                 Color = 15
@@ -140,20 +117,20 @@ Coupled
                 }
             Parameters
                 {
-                strategy = Val; 1 ; 
-                quantity = Val; 100 ; 
+                strategy = Val; 3 ; 
+                quantity = Val; 5 ; 
                 }
             }
         Atomic
             {
-            Name = GnuPlot0
-            Ports = 1 ; 0
+            Name = Colisiones0
+            Ports = 2 ; 0
             Path = sinks/gnuplot.h
             Description = Plot input signal using GnuPlot
             Graphic
                 {
-                Position = -7830 ; -2685
-                Dimension = 675 ; 720
+                Position = -3330 ; -3555
+                Dimension = 675 ; 675
                 Direction = Right
                 Color = 15
                 Icon = %sinks%gnuplot.svg
@@ -162,8 +139,8 @@ Coupled
                 {
                 Inputs = Str; %Inputs ; Number of inputs
                 Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
-                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
-                Format2 = Str;  ; Formatting options for input 2
+                Format1 = Str; with lines title 'Llegada Jugador' ; Formatting options for input 1
+                Format2 = Str; with lines title 'Llegada PC' ; Formatting options for input 2
                 Format3 = Str;  ; Formatting options for input 3
                 Format4 = Str;  ; Formatting options for input 4
                 Format5 = Str;  ; Formatting options for input 5
@@ -192,38 +169,45 @@ Coupled
             }
         Line
             {
-            Source = Cmp ;  1 ;  4 ; 0
-            Sink = Cmp ;  3 ;  1 ; -1
-            PointX = -6225 ; -4800 ; -4800 ; -3540
-            PointY = -4425 ; -4425 ; -3450 ; -3450
-            }
-        Line
-            {
-            Source = Cmp ;  1 ;  5 ; 0
-            Sink = Cmp ;  3 ;  2 ; -1
-            PointX = -6225 ; -4950 ; -4950 ; -3540
-            PointY = -4275 ; -4275 ; -3150 ; -3150
-            }
-        Line
-            {
-            Source = Cmp ;  4 ;  1 ; 0
+            Source = Cmp ;  3 ;  1 ; 0
             Sink = Cmp ;  1 ;  1 ; -1
             PointX = -8400 ; -7140 ; -7140
             PointY = -4650 ; -4650 ; -4725
             }
         Line
             {
-            Source = Cmp ;  4 ;  2 ; 0
+            Source = Cmp ;  3 ;  2 ; 0
             Sink = Cmp ;  1 ;  2 ; -1
             PointX = -8400 ; -7140 ; -7140
             PointY = -4350 ; -4350 ; -4425
             }
         Line
             {
+            Source = Cmp ;  4 ;  1 ; 0
+            Sink = Cmp ;  3 ;  1 ; -1
+            PointX = -12600 ; -10575 ; -10575 ; -9315
+            PointY = -5850 ; -5850 ; -4650 ; -4650
+            }
+        Line
+            {
             Source = Cmp ;  5 ;  1 ; 0
-            Sink = Cmp ;  7 ;  1 ; -1
-            PointX = -12600 ; -11175 ; -11175 ; -7965
-            PointY = -5850 ; -5850 ; -2325 ; -2325
+            Sink = Cmp ;  3 ;  2 ; -1
+            PointX = -12600 ; -10500 ; -10500 ; -9315
+            PointY = -3525 ; -3525 ; -4350 ; -4350
+            }
+        Line
+            {
+            Source = Cmp ;  6 ;  1 ; -1
+            Sink = Cmp ;  1 ;  4 ; 0
+            PointX = -3465 ; -3465 ; -5475 ; -5475 ; -6225
+            PointY = -3375 ; -3375 ; -3375 ; -4425 ; -4425
+            }
+        Line
+            {
+            Source = Cmp ;  6 ;  2 ; -1
+            Sink = Cmp ;  1 ;  5 ; 0
+            PointX = -3465 ; -5775 ; -5775 ; -6225
+            PointY = -3075 ; -3075 ; -4275 ; -4275
             }
         }
     }

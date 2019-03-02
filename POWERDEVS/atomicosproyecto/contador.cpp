@@ -14,16 +14,13 @@ void contador::init(double t,...) {
 	arrivalPc=0;
 	arrivalJ=0;
 }
-
 double contador::ta(double t) {
 //This function returns a double.
     return sigma;
 }
-
 void contador::dint(double t) {
     sigma = std::numeric_limits<double>::max();
 }
-
 void contador::dext(Event x, double t) {
 //The input event is in the 'x' variable.
 //where:
@@ -59,7 +56,6 @@ void contador::dext(Event x, double t) {
     }
     sigma=0;
 }
-
 Event contador::lambda(double t) {
 //This function returns an Event:
 //     Event(%&Value%, %NroPort%)
@@ -89,13 +85,12 @@ Event contador::lambda(double t) {
             break;
     }
 }
-
 void contador::exit() {
 //Code executed at the end of the simulation.
     printLog("--------------Resultados simulacion----------");
     printLog("---------------------------------------------");
     printLog("---------------------------------------------");
-    printLog("---------------------------------------------");
+    printLog("---------------------------------------------\n");
     printLog("NUESTRO Colisiones ganadas por Jugador: %d \n",colWinJ);
     printLog("NUESTRO Colisiones ganadas por Pc: %d \n",colWinPc);
     printLog("NUESTRO Colisiones empatadas: %d \n",colTie);

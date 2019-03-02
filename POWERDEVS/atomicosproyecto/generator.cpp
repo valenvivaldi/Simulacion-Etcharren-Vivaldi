@@ -14,8 +14,19 @@ switch(strategy){
 case 1:
 		weights=genExponentialDistribution(7.5,quantity);
 		interarrivals=genExponentialDistribution(10,quantity-1);
-		//std::sort(weights.begin(),weights.end());
+		weights.sort();
 		break;
+case 2:
+		weights=genExponentialDistribution(7.5,quantity);
+		interarrivals=genExponentialDistribution(10,quantity-1);
+		weights.sort(std::greater<double>());
+		break; 
+case 3:
+		weights=genExponentialDistribution(7.5,quantity);
+		weights.sort();
+		interleaved(weights);
+		interarrivals=genExponentialDistribution(10,quantity-1);
+		break; 
 default:
 		weights = genUniformDistribution(6,8,quantity);
 		interarrivals=genExponentialDistribution(10,quantity-1);
