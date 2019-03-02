@@ -21,8 +21,8 @@ int strategy;
 int quantity;
 
 //state
-std::vector<double> weights;
-std::vector<double> interarrivals;
+std::list<double> weights;
+std::list<double> interarrivals;
 
 int dispatched;
 double sigma;
