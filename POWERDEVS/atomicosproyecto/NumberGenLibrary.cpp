@@ -28,12 +28,11 @@ void printLogList(std::list<double> a){
 	for(it = a.begin(); it != a.end(); ++it){
 		printLog("%g,",*it);
 	}
-	printLog("lista:}\n");
+	printLog("}\n");
 }
 
 std::list<double> interleaved(std::list<double> a){
     std::list<double> res;
-    //printLogList(a);
     bool i=0;
     while(!a.empty()){
 		if(i){
@@ -46,11 +45,24 @@ std::list<double> interleaved(std::list<double> a){
 				i=!i;
 		}
 	}
-   
-    //printLogList(res);
     return res;
 };
 
+double popRandomElement(std::list<double>* a){
+	if((*a).size()==0){return 999999999;}
+	printLogList(*a);
+	int num=rand()%(*a).size();
+//printLog("se genero el random %d\n",num);
+	std::list<double>::iterator it = (*a).begin();
+	//printLog("Estamos por hacer el advance\n");
+	advance(it,num);
+	int res = *it;
+	//printLog("Estamos por hacer el erase, it apunta a %g \n",*it);
+	(*a).erase(it);
+	printLogList(*a);
+	//printLog("seleccionamos %g aleatoriamente \n",res);
+	return res;
+}
 
 
 
