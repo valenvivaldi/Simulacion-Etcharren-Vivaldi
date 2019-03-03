@@ -52,17 +52,48 @@ double popRandomElement(std::list<double>* a){
 	if((*a).size()==0){return 999999999;}
 	printLogList(*a);
 	int num=rand()%(*a).size();
-//printLog("se genero el random %d\n",num);
 	std::list<double>::iterator it = (*a).begin();
-	//printLog("Estamos por hacer el advance\n");
+	
 	advance(it,num);
 	int res = *it;
-	//printLog("Estamos por hacer el erase, it apunta a %g \n",*it);
+	
 	(*a).erase(it);
 	printLogList(*a);
-	//printLog("seleccionamos %g aleatoriamente \n",res);
+	
 	return res;
 }
+
+double pickPossibleWinner(std::list<double>* weights, double enemyWeight, double enemyDistance, double length ){
+	std::list<double>::iterator it = (*weights).begin();
+	double powerEnemy = potencia(enemyWeight,enemyDistance);
+	double distanciaEncuentro = (length - enemyDistance)/2;
+	double pesoSiguiente;
+	printLog("comienza la busqueda de un posible ganador\n");
+	printLog("necesitamos a alguien que supere una potencia de %g, a la distanicia de %g \n",powerEnemy,distanciaEncuentro);
+	printLogList(*weights);
+	while(it!=(*weights).end()){
+		pesoSiguiente=*(next(it));
+		printLog("%g lo supera? ",pesoSiguiente);
+		if(potencia(pesoSiguiente,distanciaEncuentro)>powerEnemy){
+			printLog("si, a ver el siguiente\n");
+			it++;
+		}else{
+			printLog("no, entonces mando el anterior que es %g\n",*it);
+			break;
+		}
+	
+	}
+	int res = *it;
+	(*weights).erase(it);
+	printLogList(*weights);
+	printLog("TERMINO SELECCION DE POSIBLE GANADOR\n");
+	
+	return res;
+	
+}
+	
+	
+
 
 
 

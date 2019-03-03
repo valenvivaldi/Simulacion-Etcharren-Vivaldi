@@ -20,6 +20,7 @@ class feedbackgenerator: public Simulator {
 //parameters
 int strategy;
 int quantity;
+int length;
 
 //state
 std::list<double> weights;
@@ -32,7 +33,9 @@ double aux;
 //indica si el proximos despache
 // sera un posible ganador(1)
 // o uno aleatorio  (0)
-bool pickwinner; 
+bool pickwinner;
+double weightOpponent;
+double distOpponent;
 public:
 	feedbackgenerator(const char *n): Simulator(n) {};
 	void init(double, ...);

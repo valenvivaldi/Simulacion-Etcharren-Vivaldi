@@ -24,6 +24,10 @@ double potencia(std::list< std::pair<double,double> > cola , double time,double 
     return cola.front().first * dist(cola,time,vc);
 };
 
+double potencia(double weigth, double distance){
+	return weigth*distance;
+	}
+
 double dist(std::list< std::pair<double,double> > cola , double time,double vc){
     return ((time-(cola.front().second))*vc);
 };

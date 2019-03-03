@@ -9,12 +9,17 @@ va_start(parameters,t);
 //	%Type% is the parameter type
 strategy =(int) va_arg(parameters, double);
 quantity = (int)va_arg(parameters, double);
+length = (int)va_arg(parameters, double);
 
 switch(strategy){
 case 4:
 		weights=genExponentialDistribution(7.5,quantity);
+		weights.sort(std::greater<double>());
+
 case 5:
 		weights=genExponentialDistribution(7.5,quantity);		
+		weights.sort(std::greater<double>());
+
 case 6:
 		weights=genExponentialDistribution(7.5,quantity);
 
@@ -63,6 +68,8 @@ if(x.port==0){ //puerto de colisiones
 		case -1://perdemos la colision
 			sigma=0;
 			pickwinner=1;
+			weightOpponent=col[1];
+			distOpponent=col[2];
 			break;
 		default: //ganamos la colision
 			sigma=10e10;
@@ -72,13 +79,14 @@ if(x.port==0){ //puerto de colisiones
 
 if (x.port==1){ //puerto de llegadas
 	if(*(double*)x.value){
-		printLog("hubo llegada nuestra! mandamos un aleatorio\n");
+		printLog("hubo llegada nuestra! mandamos un aleatorio quedan \n");
+	
 		sigma=0;
 	}else{ 
-		printLog("hubo llegada de pc! mandamos un aleatorio\n");
+		printLog("hubo llegada de pc! significa que no tenemos mas pesos que mandar\n");
 	sigma=10e10;
 	}
-
+	
 }
 
 if(weights.size()==0){sigma=10e10;}
@@ -89,13 +97,18 @@ Event feedbackgenerator::lambda(double t) {
 //where:
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
-if(dispatched < quantity &&weights.size()>0){
+if(dispatched < quantity && weights.size()>0){
 	if(pickwinner){
-		//aux=pickPossibleWinner(weights)
+		if(strategy==4){
+			aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);
+		}
+		if(strategy==5){
+			aux=weights.front();
+			weights.pop_front();
+		}
+			
 	}else{
-			printLog("antes pop random element size weiths %d\n",weights.size());
 		aux=popRandomElement(&weights);
-		printLog("termino random\n");
 	}
 	dispatched++;
 	return Event(&aux,0);
