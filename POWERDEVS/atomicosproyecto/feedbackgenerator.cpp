@@ -22,6 +22,7 @@ case 5:
 
 case 6:
 		weights=genExponentialDistribution(7.5,quantity);
+		weights.sort(std::greater<double>());
 
 default:
 		weights = genUniformDistribution(6,8,quantity);
@@ -66,8 +67,13 @@ if(x.port==0){ //puerto de colisiones
 			sigma=0;
 			break;
 		case -1://perdemos la colision
-			sigma=0;
-			pickwinner=1;
+			if(strategy==6 && !checkPossibleWinner(&weights,weightOpponent,distOpponent,length)){
+				sigma=10e10;
+			}else{
+				sigma=0;
+				pickwinner=1;
+			}
+			
 			weightOpponent=col[1];
 			distOpponent=col[2];
 			break;
@@ -84,7 +90,12 @@ if (x.port==1){ //puerto de llegadas
 		sigma=0;
 	}else{ 
 		printLog("hubo llegada de pc! significa que no tenemos mas pesos que mandar\n");
-	sigma=10e10;
+	if(!weights.empty()){
+		sigma=0;
+	}else{
+		sigma=10e10;
+	}
+	
 	}
 	
 }
@@ -105,6 +116,9 @@ if(dispatched < quantity && weights.size()>0){
 		if(strategy==5){
 			aux=weights.front();
 			weights.pop_front();
+		}
+		if(strategy==6){
+			aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);
 		}
 			
 	}else{

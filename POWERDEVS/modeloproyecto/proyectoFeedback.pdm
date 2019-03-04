@@ -117,7 +117,7 @@ Coupled
                 }
             Parameters
                 {
-                strategy = Val; 4 ; 
+                strategy = Val; 6 ; 
                 quantity = Val; 50 ; 
                 length = Val; 25 ; 
                 }

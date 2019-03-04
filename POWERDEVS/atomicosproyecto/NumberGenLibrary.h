@@ -13,3 +13,4 @@ std::list<double> interleaved(std::list<double> a);
 double popRandomElement(std::list<double>* a);
 
 double pickPossibleWinner(std::list<double>* weights, double enemyWeight, double enemyDistance, double length );
+bool checkPossibleWinner(std::list<double>* weights, double enemyWeight, double enemyDistance, double length );
