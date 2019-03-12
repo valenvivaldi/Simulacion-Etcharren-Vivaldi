@@ -34,7 +34,7 @@ default:
 }
 
 sigma=0;
-dispatched=0;
+
 
 
 }
@@ -43,7 +43,7 @@ double generator::ta(double t) {
 return sigma;
 }
 void generator::dint(double t) {
-	if(dispatched < quantity){
+	if(!weights.empty()){
 		sigma = interarrivals.back();
 		interarrivals.pop_back();
 	}else{
@@ -64,14 +64,14 @@ Event generator::lambda(double t) {
 //where:
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
-if(dispatched < quantity){
+if(!weights.empty()){
 	aux= weights.back();
 	weights.pop_back();
-	dispatched++;
+	
 	return Event(&aux,0);
-}
-else{
-	//exit();
+
+}else{
+	return Event();
 }
 
 }

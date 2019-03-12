@@ -8,7 +8,7 @@ Root-Coordinator
   Simulator
    {
     Path = sinks/gnuplot.h
-    Parameters = 3.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Plot'","with lines title 'Colisiones ganadas por Jugador'","with lines title 'Colisiones ganadas por PC'","with lines title 'Colisiones empatadas'","",""
+    Parameters = 3.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Plot'","with lines title 'First output'","","","",""
    }
   Simulator
    {
@@ -23,12 +23,12 @@ Root-Coordinator
   Simulator
    {
     Path = atomicosproyecto/generator.h
-    Parameters = 3.000000e+00,5.000000e+00
+    Parameters = 3.000000e+00,1.000000e+02
    }
   Simulator
    {
     Path = sinks/gnuplot.h
-    Parameters = 2.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Plot'","with lines title 'Llegada Jugador'","with lines title 'Llegada PC'","","",""
+    Parameters = 2.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Plot'","with lines title 'First output'","","","",""
    }
   EIC
    {

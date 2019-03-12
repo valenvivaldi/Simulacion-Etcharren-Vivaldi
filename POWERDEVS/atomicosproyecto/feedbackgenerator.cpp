@@ -14,7 +14,7 @@ void feedbackgenerator::init(double t,...) {
 	switch(strategy){
 	case 4:
 			weights=genExponentialDistribution(7.5,quantity);
-			weights.sort(std::greater<double>());
+			weights.sort();
 			break;
 	case 5:
 			weights=genExponentialDistribution(7.5,quantity);		
@@ -22,27 +22,30 @@ void feedbackgenerator::init(double t,...) {
 			break;
 	case 6:
 			weights=genExponentialDistribution(7.5,quantity);
-			weights.sort(std::greater<double>());
+			weights.sort();
 			break;
+	case 7:
+			weights=genExponentialDistribution(7.5,quantity);
+			weights.sort();
+			break;
+
 	default:
 			weights = genUniformDistribution(5,10,quantity);
 			interarrivals=genExponentialDistribution(10,quantity-1);
 			break;
 	}
 	sigma=0;
-	dispatched=0;
+
 	pickwinner=0;
 
 	printLog("TERMINO INIT\n");
 }
-
 double feedbackgenerator::ta(double t) {
 //This function returns a double.
 	return sigma;
 }
-
 void feedbackgenerator::dint(double t) {
-	if(dispatched < quantity){
+	if(weights.size()>0){
 		sigma=std::numeric_limits<double>::max();
 
 
@@ -51,7 +54,6 @@ void feedbackgenerator::dint(double t) {
 	//exit();
 	}
 }
-
 void feedbackgenerator::dext(Event x, double t) {
 //The input event is in the 'x' variable.
 //where:
@@ -84,32 +86,31 @@ void feedbackgenerator::dext(Event x, double t) {
 	if (x.port==1){ //puerto de llegadas
 		if(*(double*)x.value){
 			printLog("hubo llegada nuestra! mandamos un aleatorio quedan \n");
-		
 			sigma=0;
 		}else{ 
-			printLog("hubo llegada de pc! significa que no tenemos mas pesos que mandar\n");
-		if(!weights.empty()){
-			sigma=0;
-		}else{
-			sigma=std::numeric_limits<double>::max();
-		}
+			printLog("hubo llegada de pc!\n");
 		
 		}
 		
 	}
 	if(weights.size()==0){sigma=std::numeric_limits<double>::max();}
 }
-
 Event feedbackgenerator::lambda(double t) {
 //This function returns an Event:
 //     Event(%&Value%, %NroPort%)
 //where:
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
-	if(dispatched < quantity && weights.size()>0){
+	if(weights.size()>0){
 		if(pickwinner){
 			if(strategy==4){
-				aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);
+				if(checkPossibleWinner(&weights,weightOpponent,distOpponent,length)){
+					aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);
+
+				}else{
+					aux=popRandomElement(&weights);
+				}
+			
 			}
 			if(strategy==5){
 				aux=weights.front();
@@ -118,11 +119,13 @@ Event feedbackgenerator::lambda(double t) {
 			if(strategy==6){
 				aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);
 			}
-				
+			if(strategy==7){
+				aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);
+			}
+			pickwinner=0;
 		}else{
 			aux=popRandomElement(&weights);
 		}
-		dispatched++;
 		return Event(&aux,0);
 
 
@@ -130,10 +133,10 @@ Event feedbackgenerator::lambda(double t) {
 
 	}
 	else{
-		//exit();
+		return Event();
 	}
 
 }
-
 void feedbackgenerator::exit() {
+
 }

@@ -67,21 +67,23 @@ double pickPossibleWinner(std::list<double>* weights, double enemyWeight, double
 	std::list<double>::iterator it = (*weights).begin();
 	double distanciaEncuentro = (length - enemyDistance)/2 ;  //distancia que tendria el peso al momento de colisionar con el peso a vencer
 	double powerEnemy = potencia(enemyWeight,enemyDistance+ distanciaEncuentro);
-	
-	double pesoSiguiente;
+
 	printLog("comienza la busqueda de un posible ganador\n");
 	printLog("necesitamos a alguien que supere una potencia de %g, a la distanicia de %g \n",powerEnemy,distanciaEncuentro);
 	printLogList(*weights);
-	while((next(it))!=(*weights).end()){
-		pesoSiguiente=*(next(it));
-		printLog("%g lo supera? ",pesoSiguiente);
-		if(potencia(pesoSiguiente,distanciaEncuentro)>powerEnemy){
-			printLog("si, a ver el siguiente\n");
-			it++;
-		}else{
-			printLog("no, entonces mando el anterior que es %g\n",*it);
+	while(it!=(*weights).end()){
+		
+		printLog("%g lo supera? ",*it);
+		if(potencia(*it,distanciaEncuentro)>powerEnemy){
+			
 			break;
+		}else{
+			it++;
+			
 		}	
+	}
+	if(it == (*weights).end()){
+		it = (*weights).begin();
 	}
 	int res = *it;
 	(*weights).erase(it);
@@ -97,7 +99,7 @@ bool checkPossibleWinner(std::list<double>* weights, double enemyWeight, double 
 	double distanciaEncuentro = (length - enemyDistance)/2 ;
 	double powerEnemy = potencia(enemyWeight,enemyDistance+distanciaEncuentro);
 		printLog("Vamos a checkear si el peso mas grande  de los que quedan, le gana al elemento ganador\n");
-		if(potencia((*weights).front(),distanciaEncuentro)>powerEnemy){
+		if(potencia((*weights).back(),distanciaEncuentro)>powerEnemy){
 			printLog("Le gana! mandamos el mas chico posible\n");
 			return 1;
 		}else{

@@ -26,7 +26,6 @@ int length;
 std::list<double> weights;
 std::list<double> interarrivals;
 
-int dispatched;
 double sigma;
 double aux;
 
