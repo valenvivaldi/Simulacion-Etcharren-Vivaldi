@@ -43,14 +43,12 @@ double generator::ta(double t) {
 return sigma;
 }
 void generator::dint(double t) {
-if(dispatched < quantity){
-sigma = interarrivals.back();
-interarrivals.pop_back();
-}else{
-sigma=10e10;
- //exit();
-}
-
+	if(dispatched < quantity){
+		sigma = interarrivals.back();
+		interarrivals.pop_back();
+	}else{
+		sigma=std::numeric_limits<double>::max();
+	}
 }
 void generator::dext(Event x, double t) {
 //The input event is in the 'x' variable.

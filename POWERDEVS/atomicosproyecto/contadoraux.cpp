@@ -5,7 +5,7 @@ void contadoraux::init(double t,...) {
 	//printLog("Init (contadoraux)\n");
 	cantObjPL = 100;
 	cantObjPC = 100;
-	sigma = 10e10;
+	sigma = std::numeric_limits<double>::max();
 	// Estadisticos
 	boxesPC = 0;
 	boxesPL = 0;
@@ -31,7 +31,7 @@ void contadoraux::dint(double t) {
 		sigma = 0;
 		continues = 0;
 	} else {
-		sigma = 10e10;
+		sigma = std::numeric_limits<double>::max();
 		continues = 0;
 	}
 }
