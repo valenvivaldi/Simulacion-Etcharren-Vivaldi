@@ -18,7 +18,7 @@ void feedbackgenerator::init(double t,...) {
 			weights.sort();
 			break;
 	case 5:
-			weights=genExponentialDistribution(strategy5WeightsMean,quantity,seed);		
+			weights=genExponentialDistribution(strategy5WeightsMean,quantity,seed);
 			weights.sort(std::greater<double>());
 			break;
 	case 6:
@@ -39,21 +39,15 @@ void feedbackgenerator::init(double t,...) {
 
 	pickwinner=0;
 
-	printLog("TERMINO INIT\n");
+	//printLog("TERMINO INIT\n");
 }
 double feedbackgenerator::ta(double t) {
 //This function returns a double.
 	return sigma;
 }
 void feedbackgenerator::dint(double t) {
-	if(weights.size()>0){
-		sigma=std::numeric_limits<double>::max();
-
-
-	}else{
-		sigma=std::numeric_limits<double>::max();
+	sigma=std::numeric_limits<double>::max();
 	//exit();
-	}
 }
 void feedbackgenerator::dext(Event x, double t) {
 //The input event is in the 'x' variable.
@@ -76,7 +70,7 @@ void feedbackgenerator::dext(Event x, double t) {
 					sigma=0;
 					pickwinner=1;
 				}
-				
+
 				weightOpponent=col[1];
 				distOpponent=col[2];
 				break;
@@ -86,13 +80,13 @@ void feedbackgenerator::dext(Event x, double t) {
 	}
 	if (x.port==1){ //puerto de llegadas
 		if(*(double*)x.value){
-			printLog("hubo llegada nuestra! mandamos un aleatorio quedan \n");
+			//printLog("hubo llegada nuestra! mandamos un aleatorio quedan \n");
 			sigma=0;
-		}else{ 
-			printLog("hubo llegada de pc!\n");
-		
+		}else{
+			//printLog("hubo llegada de pc!\n");
+
 		}
-		
+
 	}
 	if(weights.size()==0){sigma=std::numeric_limits<double>::max();}
 }
@@ -111,7 +105,7 @@ Event feedbackgenerator::lambda(double t) {
 				}else{
 					aux=popRandomElement(&weights);
 				}
-			
+
 			}
 			if(strategy==5){
 				aux=weights.front();

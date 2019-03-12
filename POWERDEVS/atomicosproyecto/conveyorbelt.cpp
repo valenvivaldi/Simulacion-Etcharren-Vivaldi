@@ -1,5 +1,5 @@
 #include "conveyorbelt.h"
-void conveyorBelt::init(double t,...) {
+void conveyorbelt::init(double t,...) {
 //The 'parameters' variable contains the parameters transferred from the editor.
     va_list parameters;
     va_start(parameters,t);
@@ -21,12 +21,12 @@ void conveyorBelt::init(double t,...) {
 //cPc={};
 }
 
-double conveyorBelt::ta(double t) {
+double conveyorbelt::ta(double t) {
 //This function returns a double.
     return sigma;
 }
 
-void conveyorBelt::dint(double t) {
+void conveyorbelt::dint(double t) {
     time = time + sigma;
     if (!cJ.empty() && !cPc.empty()){                            //hubo una colision
         if (power(cJ,time,vc) > power(cPc,time,vc)){      //gana colision player
@@ -48,7 +48,7 @@ void conveyorBelt::dint(double t) {
 
 }
 
-void conveyorBelt::dext(Event x, double t) {
+void conveyorbelt::dext(Event x, double t) {
 //The input event is in the 'x' variable.
 //where:
 //     'x.value' is the value (pointer to void)
@@ -65,7 +65,7 @@ void conveyorBelt::dext(Event x, double t) {
     sigma=calculateSigma(cJ,cPc,time,l,vc);
 }
 
-Event conveyorBelt::lambda(double t) {
+Event conveyorbelt::lambda(double t) {
 //This function returns an Event:
 //     Event(%&Value%, %NroPort%)
 //where:
@@ -101,6 +101,6 @@ Event conveyorBelt::lambda(double t) {
     return Event();
 }
 
-void conveyorBelt::exit() {
+void conveyorbelt::exit() {
 //Code executed at the end of the simulation.
 }

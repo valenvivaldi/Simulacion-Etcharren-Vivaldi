@@ -10,7 +10,7 @@
 #include "iostream"
 
 
-class counter: public Simulator {
+class counter: public Simulator { 
 // Declare the state,
 // output variables
 // and parameters

@@ -3,7 +3,7 @@ Root-Coordinator
   Simulator
    {
     Path = atomicosproyecto/counter.h
-    Parameters =
+    Parameters = 
    }
   Simulator
    {
@@ -18,12 +18,12 @@ Root-Coordinator
   Simulator
    {
     Path = atomicosproyecto/generator.h
-    Parameters = 0.000000e+00,1.000000e+02,0.000000e+00
+    Parameters = 0.000000e+00,1.000000e+02,1.000000e+00
    }
   Simulator
    {
     Path = atomicosproyecto/feedbackgenerator.h
-    Parameters = 5.000000e+00,1.000000e+02,2.500000e+01,0.000000e+00
+    Parameters = 6.000000e+00,1.000000e+02,2.500000e+01,1.000000e+00
    }
   Simulator
    {

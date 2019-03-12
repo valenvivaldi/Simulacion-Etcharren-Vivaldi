@@ -3,14 +3,14 @@ Coupled
     Type = Root
     Name = proyectoFeedback
     Ports = 0; 0
-    Description =
+    Description = 
     Graphic
         {
         Position = 0; 0
         Dimension = 600; 600
         Direction = Right
         Color = 15
-        Icon =
+        Icon = 
         Window = 5000; 5000; 5000; 5000
         }
     Parameters
@@ -77,8 +77,8 @@ Coupled
                 }
             Parameters
                 {
-                l = Val; 25 ;
-                vc = Val; 1 ;
+                l = Val; 25 ; 
+                vc = Val; 1 ; 
                 }
             }
         Atomic
@@ -97,9 +97,9 @@ Coupled
                 }
             Parameters
                 {
-                strategy = Val; 0 ;
-                quantity = Val; 100 ;
-                seed = Val; 0 ;
+                strategy = Val; 0 ; 
+                quantity = Val; 100 ; 
+                seed = Val; 1 ; 
                 }
             }
         Atomic
@@ -118,10 +118,10 @@ Coupled
                 }
             Parameters
                 {
-                strategy = Val; 5 ;
-                quantity = Val; 100 ;
-                length = Val; 25 ;
-                seed = Val; 0 ;
+                strategy = Val; 6 ; 
+                quantity = Val; 100 ; 
+                length = Val; 25 ; 
+                seed = Val; 1 ; 
                 }
             }
         Atomic

@@ -65,7 +65,7 @@ Coupled
             {
             Name = ConveyorBelt
             Ports = 2 ; 2
-            Path = atomicosproyecto/conveyorBelt.h
+            Path = atomicosproyecto/conveyorbelt.h
             Description = Atomic DEVS model
             Graphic
                 {

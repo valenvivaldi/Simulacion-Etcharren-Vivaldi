@@ -1,23 +1,23 @@
 #include "Library.h"
 
-double calculateSigma(std::list< std::pair<double,double> >colaJug  , std::list< std::pair<double,double> > colaPc , double time, double l, double vc){
-    if(!(colaJug.empty())&& (colaPc.empty())) { //cola pc vacia
+double calculateSigma(std::list< std::pair<double,double> >playerQueue  , std::list< std::pair<double,double> > pcQueue , double time, double l, double vc){
+    if(!(playerQueue.empty())&& (pcQueue.empty())) { //cola pc vacia
     	//printLog("pc  vacia!\n");
-        return (l - dist(colaJug,time,vc) )/ vc;
-    }else if ((colaJug.empty()) && !(colaPc.empty())) {//cola jugador vacia
+        return (l - dist(playerQueue,time,vc) )/ vc;
+    }else if ((playerQueue.empty()) && !(pcQueue.empty())) {//cola jugador vacia
         //printLog("jugador  vacia!\n");
-        return (l - dist(colaPc,time,vc)) / vc;
-    }else if(!(colaJug.empty()) && !(colaPc.empty())) { //ninguna cola vacia
+        return (l - dist(pcQueue,time,vc)) / vc;
+    }else if(!(playerQueue.empty()) && !(pcQueue.empty())) { //ninguna cola vacia
 		//printLog("ninguna vacia!\n");
-        return (l - (dist(colaJug,time,vc) + dist(colaPc,time,vc))) / (2*vc);
+        return (l - (dist(playerQueue,time,vc) + dist(pcQueue,time,vc))) / (2*vc);
     }else{
         return std::numeric_limits<double>::max();
     }
     //printLog("%lf\n", sig);
 };
 
-double newWeight(std::list< std::pair<double,double> > colaVenc , std::list< std::pair<double,double> > colaPerd , double time,double vc){
-    return colaVenc.front().first * (power(colaPerd,time,vc) / power(colaVenc,time,vc));
+double newWeight(std::list< std::pair<double,double> > winnerQueue , std::list< std::pair<double,double> > loserQueue , double time,double vc){
+    return winnerQueue.front().first * (power(loserQueue,time,vc) / power(winnerQueue,time,vc));
 };
 
 double power(std::list< std::pair<double,double> > cola , double time,double vc){

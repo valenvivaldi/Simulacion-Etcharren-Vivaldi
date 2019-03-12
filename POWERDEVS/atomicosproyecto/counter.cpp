@@ -83,6 +83,8 @@ Event counter::lambda(double t) {
             aux = arrivalJ;
             return Event(&aux,portEmit);
             break;
+        default:
+            return Event();
     }
 }
 void counter::exit() {
@@ -91,11 +93,11 @@ void counter::exit() {
     printLog("---------------------------------------------");
     printLog("---------------------------------------------");
     printLog("---------------------------------------------\n");
-    printLog("NUESTRO Colisiones ganadas por Jugador: %d \n",colWinJ);
-    printLog("NUESTRO Colisiones ganadas por Pc: %d \n",colWinPc);
-    printLog("NUESTRO Colisiones empatadas: %d \n",colTie);
-    printLog("NUESTRO Arrivos Jugador: %d \n",arrivalJ);
-    printLog("NUESTRO Arrivos Pc: %d \n",arrivalPc);
+    printLog("Colisiones ganadas por Jugador: %d \n",colWinJ);
+    printLog("Colisiones ganadas por Pc: %d \n",colWinPc);
+    printLog("Colisiones empatadas: %d \n",colTie);
+    printLog("Arrivos Jugador: %d \n",arrivalJ);
+    printLog("Arrivos Pc: %d \n",arrivalPc);
     printLog("---------------------------------------------");
     printLog("---------------------------------------------");
     printLog("---------------------------------------------");
