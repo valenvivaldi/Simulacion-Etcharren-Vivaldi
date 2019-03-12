@@ -1,5 +1,5 @@
-#include "contador.h"
-void contador::init(double t,...) {
+#include "counter.h"
+void counter::init(double t,...) {
 //The 'parameters' variable contains the parameters transferred from the editor.
     va_list parameters;
     va_start(parameters,t);
@@ -9,19 +9,19 @@ void contador::init(double t,...) {
 //	%Type% is the parameter type
     sigma = std::numeric_limits<double>::max();
 	colWinJ=0;
-	colTie=0;			
-	colWinPc=0;			
+	colTie=0;
+	colWinPc=0;
 	arrivalPc=0;
 	arrivalJ=0;
 }
-double contador::ta(double t) {
+double counter::ta(double t) {
 //This function returns a double.
     return sigma;
 }
-void contador::dint(double t) {
+void counter::dint(double t) {
     sigma = std::numeric_limits<double>::max();
 }
-void contador::dext(Event x, double t) {
+void counter::dext(Event x, double t) {
 //The input event is in the 'x' variable.
 //where:
 //     'x.value' is the value (pointer to void)
@@ -31,15 +31,15 @@ void contador::dext(Event x, double t) {
     if(x.port==0) { //port of colitions (arrays of double)
     //double* collition =(double*)x.value;
         switch ((int)value[0]) {
-            case 1: 
+            case 1:
                 colWinJ++;
                 portEmit=0;
                 break;
-            case 0: 
+            case 0:
                 colTie++;
                 portEmit=1;
                 break;
-        	case -1: 
+        	case -1:
                 colWinPc++;
                 portEmit=2;
                 break;
@@ -56,7 +56,7 @@ void contador::dext(Event x, double t) {
     }
     sigma=0;
 }
-Event contador::lambda(double t) {
+Event counter::lambda(double t) {
 //This function returns an Event:
 //     Event(%&Value%, %NroPort%)
 //where:
@@ -85,7 +85,7 @@ Event contador::lambda(double t) {
             break;
     }
 }
-void contador::exit() {
+void counter::exit() {
 //Code executed at the end of the simulation.
     printLog("--------------Resultados simulacion----------");
     printLog("---------------------------------------------");

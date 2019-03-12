@@ -1,7 +1,7 @@
 //CPP:atomicosproyecto/Library.cpp
-//CPP:atomicosproyecto/cinta.cpp
-#if !defined cinta_h
-#define cinta_h
+//CPP:atomicosproyecto/conveyorBelt.cpp
+#if !defined conveyorBelt_h
+#define conveyorBelt_h
 
 #include "simulator.h"
 #include "event.h"
@@ -10,7 +10,7 @@
 #include "atomicosproyecto/Library.h"
 
 
-class cinta: public Simulator { 
+class conveyorBelt: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
@@ -41,7 +41,7 @@ double value2; //stores the value to return in the case that the end of the tape
 
 
 public:
-	cinta(const char *n): Simulator(n) {};
+	conveyorBelt(const char *n): Simulator(n) {};
 	void init(double, ...);
 	double ta(double t);
 	void dint(double);

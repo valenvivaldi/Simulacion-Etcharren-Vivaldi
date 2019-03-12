@@ -1,6 +1,6 @@
 #include "Library.h"
 
-double calcularsigma(std::list< std::pair<double,double> >colaJug  , std::list< std::pair<double,double> > colaPc , double time, double l, double vc){
+double calculateSigma(std::list< std::pair<double,double> >colaJug  , std::list< std::pair<double,double> > colaPc , double time, double l, double vc){
     if(!(colaJug.empty())&& (colaPc.empty())) { //cola pc vacia
     	//printLog("pc  vacia!\n");
         return (l - dist(colaJug,time,vc) )/ vc;
@@ -16,15 +16,15 @@ double calcularsigma(std::list< std::pair<double,double> >colaJug  , std::list< 
     //printLog("%lf\n", sig);
 };
 
-double pesoNuevo(std::list< std::pair<double,double> > colaVenc , std::list< std::pair<double,double> > colaPerd , double time,double vc){
-    return colaVenc.front().first * (potencia(colaPerd,time,vc) / potencia(colaVenc,time,vc));
+double newWeight(std::list< std::pair<double,double> > colaVenc , std::list< std::pair<double,double> > colaPerd , double time,double vc){
+    return colaVenc.front().first * (power(colaPerd,time,vc) / power(colaVenc,time,vc));
 };
 
-double potencia(std::list< std::pair<double,double> > cola , double time,double vc){
+double power(std::list< std::pair<double,double> > cola , double time,double vc){
     return cola.front().first * dist(cola,time,vc);
 };
 
-double potencia(double weigth, double distance){
+double power(double weigth, double distance){
 	return weigth*distance;
 	}
 
@@ -32,10 +32,10 @@ double dist(std::list< std::pair<double,double> > cola , double time,double vc){
     return ((time-(cola.front().second))*vc);
 };
 
-void mostrarCola (std::list< std::pair<double,double> > cola){
-	printLog("{");			
+void showQueue (std::list< std::pair<double,double> > cola){
+	printLog("{");
 	for (std::list<std::pair<double,double> >::iterator it=cola.begin(); it != cola.end(); ++it){
-		printLog("%f,",(*it).first);	
-	}				
+		printLog("%f,",(*it).first);
+	}
 	printLog("}\n");
 }

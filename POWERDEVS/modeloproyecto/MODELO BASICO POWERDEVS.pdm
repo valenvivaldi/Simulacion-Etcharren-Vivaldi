@@ -3,14 +3,14 @@ Coupled
     Type = Root
     Name = Model 01
     Ports = 0; 0
-    Description = 
+    Description =
     Graphic
         {
         Position = 0; 0
         Dimension = 600; 600
         Direction = Right
         Color = 15
-        Icon = 
+        Icon =
         Window = 5000; 5000; 5000; 5000
         }
     Parameters
@@ -22,7 +22,7 @@ Coupled
             {
             Name = GenPC
             Ports = 0 ; 1
-            Path = 
+            Path =
             Description = Atomic DEVS model
             Graphic
                 {
@@ -40,7 +40,7 @@ Coupled
             {
             Name = GenJ
             Ports = 2 ; 1
-            Path = 
+            Path =
             Description = Atomic DEVS model
             Graphic
                 {
@@ -56,9 +56,9 @@ Coupled
             }
         Atomic
             {
-            Name = Cinta
+            Name = ConveyorBelt
             Ports = 2 ; 2
-            Path = atomicsproyecto/cinta.h
+            Path = atomicsproyecto/conveyorbelt.h
             Description = Atomic DEVS model
             Graphic
                 {
@@ -70,8 +70,8 @@ Coupled
                 }
             Parameters
                 {
-                l = Val; 25 ; 
-                vc = Val; 0 ; 
+                l = Val; 25 ;
+                vc = Val; 0 ;
                 }
             }
         Atomic
@@ -101,9 +101,9 @@ Coupled
             }
         Atomic
             {
-            Name = Contador
+            Name = Counter
             Ports = 2 ; 1
-            Path = atomicsproyecto/contador.h
+            Path = atomicsproyecto/counter.h
             Description = Atomic DEVS model
             Graphic
                 {

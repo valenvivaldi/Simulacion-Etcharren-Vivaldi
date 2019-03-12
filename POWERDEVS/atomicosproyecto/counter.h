@@ -1,6 +1,6 @@
-//CPP:atomicosproyecto/contador.cpp
-#if !defined contador_h
-#define contador_h
+//CPP:atomicosproyecto/counter.cpp
+#if !defined counter_h
+#define counter_h
 
 #include "simulator.h"
 #include "event.h"
@@ -10,7 +10,7 @@
 #include "iostream"
 
 
-class contador: public Simulator { 
+class counter: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
@@ -25,10 +25,10 @@ int arrivalJ;
 
 int portEmit;
 double aux;
-	
+
 double sigma;
 public:
-	contador(const char *n): Simulator(n) {};
+	counter(const char *n): Simulator(n) {};
 	void init(double, ...);
 	double ta(double t);
 	void dint(double);
