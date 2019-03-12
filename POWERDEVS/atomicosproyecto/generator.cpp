@@ -9,27 +9,28 @@ va_start(parameters,t);
 //	%Type% is the parameter type
 strategy =(int) va_arg(parameters, double);
 quantity = (int)va_arg(parameters, double);
+seed = (unsigned int)va_arg(parameters, double);
 
 switch(strategy){
 case 1:
-		weights=genExponentialDistribution(7.5,quantity);
-		interarrivals=genExponentialDistribution(10,quantity-1);
+		weights=genExponentialDistribution(strategy1WeightsMean,quantity,seed);
+		interarrivals=genExponentialDistribution(strategy1InterrarrivalsMean,quantity-1,seed);
 		weights.sort();
 		break;
 case 2:
-		weights=genExponentialDistribution(7.5,quantity);
-		interarrivals=genExponentialDistribution(10,quantity-1);
+		weights=genExponentialDistribution(strategy2WeightsMean,quantity,seed);
+		interarrivals=genExponentialDistribution(strategy2InterrarrivalsMean,quantity-1,seed);
 		weights.sort(std::greater<double>());
 		break; 
 case 3:
-		weights=genExponentialDistribution(7.5,quantity);
+		weights=genExponentialDistribution(strategy3WeightsMean,quantity,seed);
 		weights.sort();
 		interleaved(weights);
-		interarrivals=genExponentialDistribution(10,quantity-1);
+		interarrivals=genExponentialDistribution(strategy3InterrarrivalsMean,quantity-1,seed);
 		break; 
 default:
-		weights = genUniformDistribution(6,8,quantity);
-		interarrivals=genExponentialDistribution(10,quantity-1);
+		weights = genUniformDistribution(strategy0WeightsMin,strategy0WeightsMax,quantity,seed);
+		interarrivals=genExponentialDistribution(strategy0InterrarrivalsMean,quantity-1,seed);
 		break;
 }
 

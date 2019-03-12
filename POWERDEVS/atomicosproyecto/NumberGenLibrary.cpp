@@ -1,9 +1,17 @@
 #include "NumberGenLibrary.h"
 
-std::list<double> genExponentialDistribution(double mean, int qty){
+std::list<double> genExponentialDistribution(double mean, int qty,unsigned int seed){
     std::list<double> arrExp;
-    std::random_device rd;
-    std::mt19937 generator(rd());
+    
+    std::mt19937 generator;
+    if(seed == 0){
+		std::random_device rd;
+		generator.seed(rd());
+	}else{
+	generator.seed(seed);
+			
+	}
+    
     std::exponential_distribution<double> distExp(1.0/mean);
     for (int i=0; i<qty; i++){
         arrExp.push_back(distExp(generator));
@@ -11,10 +19,15 @@ std::list<double> genExponentialDistribution(double mean, int qty){
     return arrExp;
 };
 
-std::list<double> genUniformDistribution(double min, double max, int qty){
+std::list<double> genUniformDistribution(double min, double max, int qty,unsigned int seed){
     std::list<double> arrUn;
-    std::random_device rd;
-    std::mt19937 generator(rd());
+    std::mt19937 generator;
+    if(seed == 0){
+		std::random_device rd;
+		generator.seed(rd());
+	}else{
+	generator.seed(seed);		
+	}
     std::uniform_real_distribution<double> distUn(min, max);
     for (int i=0; i<qty; i++){
         arrUn.push_back(distUn(generator));

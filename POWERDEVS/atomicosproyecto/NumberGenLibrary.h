@@ -7,8 +7,8 @@
 //#include "stdarg.h"
 #include "Library.h"
 
-std::list<double> genExponentialDistribution(double mean, int qty);
-std::list<double> genUniformDistribution(double min, double max, int qty);
+std::list<double> genExponentialDistribution(double mean, int qty,unsigned int seed);
+std::list<double> genUniformDistribution(double min, double max, int qty,unsigned int seed);
 std::list<double> interleaved(std::list<double> a);
 double popRandomElement(std::list<double>* a);
 
