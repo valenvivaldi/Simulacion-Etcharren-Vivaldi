@@ -10,18 +10,10 @@
 #include "stdarg.h"
 
 #include "atomicosproyecto/NumberGenLibrary.h"
-//defines
-#define strategy0WeightsMin 5
-#define strategy0WeightsMax 10
-#define strategy0InterrarrivalsMean 10
-#define strategy4WeightsMean 7.5
-
-#define strategy5WeightsMean 7.5
-#define strategy6WeightsMean 7.5
-#define strategy7WeightsMean 7.5
+#include "strategies.h"
 
 
-class feedbackgenerator: public Simulator { 
+class feedbackgenerator: public Simulator {
 // Declare the state,
 // output variables
 // and parameters

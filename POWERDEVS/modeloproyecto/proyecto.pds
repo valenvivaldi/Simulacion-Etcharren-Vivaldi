@@ -3,7 +3,7 @@ Root-Coordinator
   Simulator
    {
     Path = atomicosproyecto/counter.h
-    Parameters =
+    Parameters = 
    }
   Simulator
    {

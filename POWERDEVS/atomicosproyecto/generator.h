@@ -9,17 +9,10 @@
 #include "stdarg.h"
 
 #include "atomicosproyecto/NumberGenLibrary.h"
-#define strategy0WeightsMin 5
-#define strategy0WeightsMax 10
-#define strategy0InterrarrivalsMean 10
-#define strategy1WeightsMean 7.5
-#define strategy1InterrarrivalsMean 10
-#define strategy2WeightsMean 7.5
-#define strategy2InterrarrivalsMean 10
-#define strategy3WeightsMean 7.5
-#define strategy3InterrarrivalsMean 10
+#include "strategies.h"
 
-class generator: public Simulator { 
+
+class generator: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
