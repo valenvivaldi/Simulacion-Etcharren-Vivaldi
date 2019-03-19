@@ -33,9 +33,9 @@ double dist(std::list< std::pair<double,double> > cola , double time,double vc){
 };
 
 void showQueue (std::list< std::pair<double,double> > cola){
-	printLog("{");
+	//printLog("{");
 	for (std::list<std::pair<double,double> >::iterator it=cola.begin(); it != cola.end(); ++it){
-		printLog("%f,",(*it).first);
+		//printLog("%f,",(*it).first);
 	}
-	printLog("}\n");
+	//printLog("}\n");
 }

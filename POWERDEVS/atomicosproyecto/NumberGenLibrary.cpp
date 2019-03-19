@@ -37,11 +37,11 @@ std::list<double> genUniformDistribution(double min, double max, int qty,unsigne
 
 void printLogList(std::list<double> a){
 	std::list<double>::iterator it;
-	printLog("lista:{");
+	//printLog("lista:{");
 	for(it = a.begin(); it != a.end(); ++it){
-		printLog("%g,",*it);
+		//printLog("%g,",*it);
 	}
-	printLog("}\n");
+	//printLog("}\n");
 }
 
 std::list<double> interleaved(std::list<double> a){
@@ -64,15 +64,15 @@ std::list<double> interleaved(std::list<double> a){
 //precondicion: a.size()>0
 
 double popRandomElement(std::list<double>* a){
-    printLog("Necesitamos un aleatorio de esta lista \n");
-    printLogList(*a);
+    //printLog("Necesitamos un aleatorio de esta lista \n");
+    //printLogList(*a);
 	int num=rand()%(*a).size();
 	std::list<double>::iterator it = (*a).begin();
 	advance(it,num);
 	double res = *it;
 	(*a).erase(it);
-	printLogList(*a);
-    printLog("enviamos a %g \n",res);
+	//printLogList(*a);
+    //printLog("enviamos a %g \n",res);
 	return res;
 }
 
@@ -82,12 +82,12 @@ double pickPossibleWinner(std::list<double>* weights, double enemyWeight, double
 	double collitionPlace = (length - enemyDistance)/2 ;  //distancia que tendria el peso al momento de colisionar con el peso a vencer
 	double powerEnemy = power(enemyWeight,enemyDistance+ collitionPlace);
 
-	printLog("comienza la busqueda de un posible ganador\n");
-	printLog("necesitamos a alguien que supere una potencia de %g, a la distanicia de %g \n",powerEnemy,collitionPlace);
-	printLogList(*weights);
+	//printLog("comienza la busqueda de un posible ganador\n");
+	//printLog("necesitamos a alguien que supere una potencia de %g, a la distanicia de %g \n",powerEnemy,collitionPlace);
+	//printLogList(*weights);
 	while(it!=(*weights).end()){
 
-		printLog("%g lo supera? ",*it);
+		//printLog("%g lo supera? ",*it);
 		if(power(*it,collitionPlace)>powerEnemy){
 
 			break;
@@ -101,8 +101,8 @@ double pickPossibleWinner(std::list<double>* weights, double enemyWeight, double
 	}
 	int res = *it;
 	(*weights).erase(it);
-	printLogList(*weights);
-	printLog("TERMINO SELECCION DE POSIBLE GANADOR: %g\n",res);
+	//printLogList(*weights);
+	//printLog("TERMINO SELECCION DE POSIBLE GANADOR: %g\n",res);
 
 	return res;
 
@@ -114,12 +114,12 @@ bool checkPossibleWinner(std::list<double>* weights, double enemyWeight, double 
   }
 	double collitionPlace = (length - enemyDistance)/2 ;
 	double powerEnemy = power(enemyWeight,enemyDistance+collitionPlace);
-		printLog("Vamos a checkear si el peso mas grande  de los que quedan, le gana al elemento ganador\n");
+		//printLog("Vamos a checkear si el peso mas grande  de los que quedan, le gana al elemento ganador\n");
 		if(power((*weights).back(),collitionPlace)>powerEnemy){
-			printLog("Le gana! mandamos el mas chico posible\n");
+			//printLog("Le gana! mandamos el mas chico posible\n");
 			return 1;
 		}else{
-			printLog("El mas grande no le gana, entonces no mandamos nada!\n");
+			//printLog("El mas grande no le gana, entonces no mandamos nada!\n");
 			return 0;
 		}
 

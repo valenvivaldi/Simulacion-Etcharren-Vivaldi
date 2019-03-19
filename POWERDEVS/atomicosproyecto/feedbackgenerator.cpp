@@ -62,7 +62,7 @@ void feedbackgenerator::dext(Event x, double t) {
 //     'x.port' is the port number
 //     'e' is the time elapsed since last transition
 
-	printLog("delta ext %d \n",x.port);
+	//printLog("delta ext %d \n",x.port);
 	if(x.port==0){ //puerto de colisiones
 		double* col =(double*)x.value;
 		switch ((int)col[0]){
