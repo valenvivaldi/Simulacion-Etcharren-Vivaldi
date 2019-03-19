@@ -64,18 +64,15 @@ std::list<double> interleaved(std::list<double> a){
 //precondicion: a.size()>0
 
 double popRandomElement(std::list<double>* a){
-
-  printLog("Necesitamos un aleatorio de esta lista \n");
-  printLogList(*a);
+    printLog("Necesitamos un aleatorio de esta lista \n");
+    printLogList(*a);
 	int num=rand()%(*a).size();
 	std::list<double>::iterator it = (*a).begin();
-
 	advance(it,num);
-	int res = *it;
-
+	double res = *it;
 	(*a).erase(it);
 	printLogList(*a);
-  printLog("enviamos a %g \n",res);
+    printLog("enviamos a %g \n",res);
 	return res;
 }
 

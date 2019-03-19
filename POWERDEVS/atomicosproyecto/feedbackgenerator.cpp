@@ -12,6 +12,13 @@ void feedbackgenerator::init(double t,...) {
 	length = (int)va_arg(parameters, double);
 	seed = (unsigned int)va_arg(parameters, double);
 
+	if(seed == 0){
+        std::random_device rd;
+        srand(rd());
+    }else{
+        srand(seed);
+    }
+
 	switch(strategy){
 	case 4:
 			weights=genExponentialDistribution(strategy4WeightsMean,quantity,seed);
@@ -36,7 +43,6 @@ void feedbackgenerator::init(double t,...) {
 			break;
 	}
 	sigma=0;
-
 	pickwinner=0;
 
 	//printLog("TERMINO INIT\n");
@@ -83,6 +89,10 @@ void feedbackgenerator::dext(Event x, double t) {
 			//printLog("hubo llegada nuestra! mandamos un aleatorio quedan \n");
 			sigma=0;
 		}else{
+			if ((strategy==6 && checkPossibleWinner(&weights,weightOpponent,distOpponent,length))){
+				sigma = 0;
+				pickwinner = 1;
+			}
 			//printLog("hubo llegada de pc!\n");
 
 		}
