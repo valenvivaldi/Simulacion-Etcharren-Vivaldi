@@ -63,4 +63,7 @@ seed Intearrivo PC 1171049869
 seed Peso Jugador 1646868795
 seed Intearrivo Jugador 2051556034
 
+
+Link Hoja de calculo:https://docs.google.com/spreadsheets/d/1yM3mydp4G_287xeEKn-x_JRXC-pgtHnYd27chdpC7fw/edit?usp=sharing
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
