@@ -12,12 +12,12 @@ void feedbackgenerator::init(double t,...) {
 	length = (int)va_arg(parameters, double);
 	seed = (unsigned int)va_arg(parameters, double);
 
-	if(seed == 0){
+	/*if(seed == 0){
         std::random_device rd;
         srand(rd());
     }else{
         srand(seed);
-    }
+    }*/
 
 	switch(strategy){
 	case 4:
@@ -29,6 +29,7 @@ void feedbackgenerator::init(double t,...) {
 			weights.sort(std::greater<double>());
 			break;
 	case 6:
+			//weights = genUniformDistribution(strategy0WeightsMin,strategy0WeightsMax,quantity,seed);
 			weights=genExponentialDistribution(strategy6WeightsMean,quantity,seed);
 			weights.sort();
 			break;
@@ -63,10 +64,15 @@ void feedbackgenerator::dext(Event x, double t) {
 //     'e' is the time elapsed since last transition
 
 	//printLog("delta ext %d \n",x.port);
+	double* col =(double*)x.value;
+	weightOpponent=col[1];
+	distOpponent=col[2];
 	if(x.port==0){ //puerto de colisiones
-		double* col =(double*)x.value;
 		switch ((int)col[0]){
 			case 0: //empatamos la colision
+				if(strategy==6 && checkPossibleWinner(&weights,weightOpponent,distOpponent,length)){
+					pickwinner=1;
+				}
 				sigma=0;
 				break;
 			case -1://perdemos la colision
@@ -76,24 +82,21 @@ void feedbackgenerator::dext(Event x, double t) {
 					sigma=0;
 					pickwinner=1;
 				}
-
-				weightOpponent=col[1];
-				distOpponent=col[2];
 				break;
 			default: //ganamos la colision
 				sigma=std::numeric_limits<double>::max();
 		}
 	}
 	if (x.port==1){ //puerto de llegadas
-		if(*(double*)x.value){
+		if((int)col[0]){
 			//printLog("hubo llegada nuestra! mandamos un aleatorio quedan \n");
 			sigma=0;
 		}else{
+			//printLog("hubo llegada de pc!\n");
 			if ((strategy==6 && checkPossibleWinner(&weights,weightOpponent,distOpponent,length))){
 				sigma = 0;
 				pickwinner = 1;
 			}
-			//printLog("hubo llegada de pc!\n");
 
 		}
 
@@ -110,8 +113,7 @@ Event feedbackgenerator::lambda(double t) {
 		if(pickwinner){
 			if(strategy==4){
 				if(checkPossibleWinner(&weights,weightOpponent,distOpponent,length)){
-					aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);
-
+					aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);	
 				}else{
 					aux=popRandomElement(&weights);
 				}

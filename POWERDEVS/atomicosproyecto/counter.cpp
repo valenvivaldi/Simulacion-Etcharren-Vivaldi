@@ -46,12 +46,12 @@ void counter::dext(Event x, double t) {
         }
     }
     if(x.port==1) { //port of arrivals
-        if(*value==1) {
+        if((int)value[0]) {
             arrivalJ++;
-			portEmit=4;
-        }else if (*value==0) {
+			      portEmit=4;
+        }else{
             arrivalPc++;
-			portEmit=3;
+			      portEmit=3;
         }
     }
     sigma=0;
@@ -98,6 +98,7 @@ void counter::exit() {
     printLog("Colisiones empatadas: %d \n",colTie);
     printLog("Arrivos Jugador: %d \n",arrivalJ);
     printLog("Arrivos Pc: %d \n",arrivalPc);
+    printLog("Total: %d \n",arrivalPc+arrivalJ+colTie*2+colWinJ+colWinPc);
     printLog("---------------------------------------------");
     printLog("---------------------------------------------");
     printLog("---------------------------------------------");

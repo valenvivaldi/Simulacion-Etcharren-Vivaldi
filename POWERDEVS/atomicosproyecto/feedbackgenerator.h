@@ -13,7 +13,7 @@
 #include "strategies.h"
 
 
-class feedbackgenerator: public Simulator {
+class feedbackgenerator: public Simulator { 
 // Declare the state,
 // output variables
 // and parameters

@@ -15,7 +15,7 @@ switch(strategy){
 case 1:
 		weights=genExponentialDistribution(strategy1WeightsMean,quantity,seed);
 		interarrivals=genExponentialDistribution(strategy1InterrarrivalsMean,quantity-1,seed);
-		weights.sort();
+		//weights.sort();
 		break;
 case 2:
 		weights=genExponentialDistribution(strategy2WeightsMean,quantity,seed);

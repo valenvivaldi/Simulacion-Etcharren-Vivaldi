@@ -16,7 +16,9 @@ void conveyorbelt::init(double t,...) {
     value1[0]=0;
     value1[1]=0;
     value1[2]=0;
-    value2=0;
+    value2[0]=0;
+    value2[1]=0;
+    value2[2]=0;;
 //cJ={};
 //cPc={};
 }
@@ -28,7 +30,7 @@ double conveyorbelt::ta(double t) {
 
 void conveyorbelt::dint(double t) {
     time = time + sigma;
-    if (!cJ.empty() && !cPc.empty()){                            //hubo una colision
+    if (!cJ.empty() && !cPc.empty()){   //hubo una colision
         if (power(cJ,time,vc) > power(cPc,time,vc)){      //gana colision player
             cJ.front().first = newWeight(cJ,cPc,time,vc);       //se actualiza el peso del objeto de la cabeza de la cola ganadora
             cPc.pop_front();
@@ -85,17 +87,23 @@ Event conveyorbelt::lambda(double t) {
         return Event(&value1,0);
     }else if(!(cJ.empty()) && !(cPc.empty()) && power(cJ,time+sigma,vc) == power(cPc,time+sigma,vc)) { //empate colision
         //printLog("Colision Ouput! Empate \n");
+        // otra mejora a realizar
         value1[0]=0;
-        value1[1]=0;
-        value1[2]=0;
+        value1[1]=weightSecondElement(cPc);
+        value1[2]=distSecond(cPc,time+sigma,vc);
+
         return Event(&value1,0);
     }else if (!cJ.empty() && cPc.empty()) { //llego al final de la cinta un objeto de jugador
         //printLog("llego un elemento de Jugador \n");
-        value2=1;
+        value2[0]=1;
+        value2[1]=0;
+        value2[2]=0;
         return Event(&value2,1);
     }else if (cJ.empty() && !cPc.empty()) { //llego al final de la cinta un objeto de pc
         //printLog("llrgo un elemento de PC \n");
-        value2=0;
+        value2[0]=0;
+        value2[1]=weightSecondElement(cPc);
+        value2[2]=distSecond(cPc,time+sigma,vc);
         return Event(&value2,1);
     }
     return Event();

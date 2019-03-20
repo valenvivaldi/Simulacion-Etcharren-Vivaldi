@@ -98,8 +98,8 @@ Coupled
             Parameters
                 {
                 strategy = Val; 0 ; 
-                quantity = Val; 100 ; 
-                seed = Val; 1 ; 
+                quantity = Val; 6000 ; 
+                seed = Val; 0 ; 
                 }
             }
         Atomic
@@ -119,9 +119,9 @@ Coupled
             Parameters
                 {
                 strategy = Val; 6 ; 
-                quantity = Val; 100 ; 
+                quantity = Val; 6000 ; 
                 length = Val; 25 ; 
-                seed = Val; 1 ; 
+                seed = Val; 0 ; 
                 }
             }
         Atomic
@@ -149,17 +149,48 @@ Coupled
                 Format5 = Str;  ; Formatting options for input 5
                 }
             }
+        Atomic
+            {
+            Name = GnuPlot0
+            Ports = 1 ; 0
+            Path = sinks/gnuplot.h
+            Description = Plot input signal using GnuPlot
+            Graphic
+                {
+                Position = -9705 ; -510
+                Dimension = 675 ; 720
+                Direction = Right
+                Color = 15
+                Icon = %sinks%gnuplot.svg
+                }
+            Parameters
+                {
+                Inputs = Str; %Inputs ; Number of inputs
+                Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
+                Format1 = Str; with lines title 'First output' ; Formatting options for input 1
+                Format2 = Str;  ; Formatting options for input 2
+                Format3 = Str;  ; Formatting options for input 3
+                Format4 = Str;  ; Formatting options for input 4
+                Format5 = Str;  ; Formatting options for input 5
+                }
+            }
         Point
             {
-            ConectedLines = 6 ; 10 ; 11
+            ConectedLines = 6 ; 9 ; 10
             ConectedExtrems = Org ; Org ; Org
             Position = -6975 ; -3825
             }
         Point
             {
-            ConectedLines = 2 ; 12 ; 13
+            ConectedLines = 2 ; 11 ; 12
             ConectedExtrems = Org ; Org ; Org
             Position = -6975 ; -3525
+            }
+        Point
+            {
+            ConectedLines = 13 ; 14 ; 15
+            ConectedExtrems = Org ; Org ; Org
+            Position = -10575 ; -2250
             }
         Line
             {
@@ -205,13 +236,6 @@ Coupled
             }
         Line
             {
-            Source = Cmp ;  5 ;  1 ; 0
-            Sink = Cmp ;  3 ;  2 ; -1
-            PointX = -11475 ; -9450 ; -9450 ; -8190
-            PointY = -2250 ; -2250 ; -3525 ; -3525
-            }
-        Line
-            {
             Source = Cmp ;  1 ;  1 ; 0
             Sink = Cmp ;  2 ;  1 ; -1
             PointX = -5475 ; -4350 ; -4350 ; -2115
@@ -228,8 +252,8 @@ Coupled
             {
             Source = Cmp ;  5 ;  1 ; -1
             Sink = Pnt ;  1 ; -1 ; 0
-            PointX = -12390 ; -13200 ; -13200 ; -6975 ; -6975
-            PointY = -2400 ; -2400 ; -6075 ; -6075 ; -3825
+            PointX = -12390 ; -13200 ; -13200 ; -6525 ; -6525 ; -6975
+            PointY = -2400 ; -2400 ; -6075 ; -6075 ; -3825 ; -3825
             }
         Line
             {
@@ -242,8 +266,8 @@ Coupled
             {
             Source = Cmp ;  5 ;  2 ; -1
             Sink = Pnt ;  2 ; -1 ; 0
-            PointX = -12390 ; -13200 ; -13200 ; -6975 ; -6975
-            PointY = -2100 ; -2100 ; -975 ; -975 ; -3525
+            PointX = -12390 ; -13200 ; -13200 ; -6525 ; -6525 ; -6975
+            PointY = -2100 ; -2100 ; -975 ; -975 ; -3525 ; -3525
             }
         Line
             {
@@ -251,6 +275,27 @@ Coupled
             Sink = Cmp ;  1 ;  2 ; -1
             PointX = -6975 ; -6390 ; -6390
             PointY = -3525 ; -3525 ; -3525
+            }
+        Line
+            {
+            Source = Cmp ;  5 ;  1 ; 0
+            Sink = Pnt ;  3 ; -1 ; 0
+            PointX = -11475 ; -11475 ; -10575
+            PointY = -2250 ; -2250 ; -2250
+            }
+        Line
+            {
+            Source = Cmp ;  7 ;  1 ; -1
+            Sink = Pnt ;  3 ; -1 ; 0
+            PointX = -9840 ; -10575 ; -10575
+            PointY = -150 ; -150 ; -2250
+            }
+        Line
+            {
+            Source = Pnt ;  3 ; -1 ; 0
+            Sink = Cmp ;  3 ;  2 ; -1
+            PointX = -10575 ; -9450 ; -9450 ; -8190
+            PointY = -2250 ; -2250 ; -3525 ; -3525
             }
         }
     }

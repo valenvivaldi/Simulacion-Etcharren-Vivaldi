@@ -11,11 +11,25 @@ std::list<double> genExponentialDistribution(double mean, int qty,unsigned int s
 	generator.seed(seed);
 
 	}
-
+    double num;
+    double total=0;
+    int entero1 =0;
+    int entero2=0;
+    int entero3 =0;
     std::exponential_distribution<double> distExp(1.0/mean);
     for (int i=0; i<qty; i++){
-        arrExp.push_back(distExp(generator));
+        num = distExp(generator);
+        total+= num;
+        arrExp.push_back(num);
+        if(num<5){entero1++;
+        }else if(num>10){
+          entero2++;
+        }else{entero3++;}
     }
+    printLog ("media  %g\n", total / qty);
+    printLog("menores que 5 %d \n",entero1);
+    printLog("normales  %d \n",entero3);
+    printLog("mayores que 10 %d \n",entero2);
     return arrExp;
 };
 
