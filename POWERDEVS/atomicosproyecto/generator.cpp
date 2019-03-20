@@ -9,28 +9,29 @@ va_start(parameters,t);
 //	%Type% is the parameter type
 strategy =(int) va_arg(parameters, double);
 quantity = (int)va_arg(parameters, double);
-seed = (unsigned int)va_arg(parameters, double);
+seedWeights = (unsigned int)va_arg(parameters, double);
+seedInterarrivals = (unsigned int)va_arg(parameters, double);
 
 switch(strategy){
 case 1:
-		weights=genExponentialDistribution(strategy1WeightsMean,quantity,seed);
-		interarrivals=genExponentialDistribution(strategy1InterrarrivalsMean,quantity-1,seed);
+		weights=genExponentialDistribution(strategy1WeightsMean,quantity,seedWeights);
+		interarrivals=genExponentialDistribution(strategy1InterrarrivalsMean,quantity-1,seedInterarrivals);
 		//weights.sort();
 		break;
 case 2:
-		weights=genExponentialDistribution(strategy2WeightsMean,quantity,seed);
-		interarrivals=genExponentialDistribution(strategy2InterrarrivalsMean,quantity-1,seed);
+		weights=genExponentialDistribution(strategy2WeightsMean,quantity,seedWeights);
+		interarrivals=genExponentialDistribution(strategy2InterrarrivalsMean,quantity-1,seedInterarrivals);
 		weights.sort(std::greater<double>());
-		break; 
+		break;
 case 3:
-		weights=genExponentialDistribution(strategy3WeightsMean,quantity,seed);
+		weights=genExponentialDistribution(strategy3WeightsMean,quantity,seedWeights);
 		weights.sort();
 		interleaved(weights);
-		interarrivals=genExponentialDistribution(strategy3InterrarrivalsMean,quantity-1,seed);
-		break; 
+		interarrivals=genExponentialDistribution(strategy3InterrarrivalsMean,quantity-1,seedInterarrivals);
+		break;
 default:
-		weights = genUniformDistribution(strategy0WeightsMin,strategy0WeightsMax,quantity,seed);
-		interarrivals=genExponentialDistribution(strategy0InterrarrivalsMean,quantity-1,seed);
+		weights = genUniformDistribution(strategy0WeightsMin,strategy0WeightsMax,quantity,seedWeights);
+		interarrivals=genExponentialDistribution(strategy0InterrarrivalsMean,quantity-1,seedInterarrivals);
 		break;
 }
 
@@ -68,7 +69,7 @@ Event generator::lambda(double t) {
 if(!weights.empty()){
 	aux= weights.back();
 	weights.pop_back();
-	
+
 	return Event(&aux,0);
 
 }else{

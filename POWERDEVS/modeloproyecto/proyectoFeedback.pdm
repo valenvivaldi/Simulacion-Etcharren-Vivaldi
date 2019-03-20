@@ -98,8 +98,9 @@ Coupled
             Parameters
                 {
                 strategy = Val; 0 ; 
-                quantity = Val; 6000 ; 
-                seed = Val; 0 ; 
+                quantity = Val; 100 ; 
+                seedWeights = Val; 1 ; 
+                seedInterarrivals = Val; 1 ; 
                 }
             }
         Atomic
@@ -118,10 +119,11 @@ Coupled
                 }
             Parameters
                 {
-                strategy = Val; 6 ; 
-                quantity = Val; 6000 ; 
+                strategy = Val; 7 ; 
+                quantity = Val; 100 ; 
                 length = Val; 25 ; 
-                seed = Val; 0 ; 
+                seedWeights = Val; 6 ; 
+                seedInterarrivals = Val; 6 ; 
                 }
             }
         Atomic

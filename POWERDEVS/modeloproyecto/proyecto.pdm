@@ -99,7 +99,8 @@ Coupled
                 {
                 strategy = Val; 0 ; 
                 quantity = Val; 10000 ; 
-                seed = Val; 0 ; 
+                seedWeights = Val; 0 ; 
+                seedInterarrivals = Val; 0 ; 
                 }
             }
         Atomic
@@ -120,7 +121,8 @@ Coupled
                 {
                 strategy = Val; 1 ; 
                 quantity = Val; 10000 ; 
-                seed = Val; 0 ; 
+                seedWeights = Val; 0 ; 
+                seedInterarrivals = Val; 0 ; 
                 }
             }
         Atomic
@@ -166,7 +168,7 @@ Coupled
                 {
                 Inputs = Str; %Inputs ; Number of inputs
                 Format = Str; set xrange [0:%tf] @ set grid @ set title 'Plot' ; General Formatting (use @ as line break)
-                Format1 = Str;  title 'First output' ; Formatting options for input 1
+                Format1 = Str; title 'First output' ; Formatting options for input 1
                 Format2 = Str;  ; Formatting options for input 2
                 Format3 = Str;  ; Formatting options for input 3
                 Format4 = Str;  ; Formatting options for input 4

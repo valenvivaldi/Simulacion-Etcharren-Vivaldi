@@ -10,37 +10,38 @@ void feedbackgenerator::init(double t,...) {
 	strategy =(int) va_arg(parameters, double);
 	quantity = (int)va_arg(parameters, double);
 	length = (int)va_arg(parameters, double);
-	seed = (unsigned int)va_arg(parameters, double);
+	seedWeights = (unsigned int)va_arg(parameters, double);
+	seedInterarrivals = (unsigned int)va_arg(parameters, double);
 
-	if(seed == 0){
+	if(seedInterarrivals == 0){
         std::random_device rd;
         srand(rd());
     }else{
-        srand(seed);
+        srand(seedInterarrivals);
     }
 
 	switch(strategy){
 	case 4:
-			weights=genExponentialDistribution(strategy4WeightsMean,quantity,seed);
+			weights=genExponentialDistribution(strategy4WeightsMean,quantity,seedWeights);
 			weights.sort();
 			break;
 	case 5:
-			weights=genExponentialDistribution(strategy5WeightsMean,quantity,seed);
+			weights=genExponentialDistribution(strategy5WeightsMean,quantity,seedWeights);
 			weights.sort(std::greater<double>());
 			break;
 	case 6:
 			//weights = genUniformDistribution(strategy0WeightsMin,strategy0WeightsMax,quantity,seed);
-			weights=genExponentialDistribution(strategy6WeightsMean,quantity,seed);
+			weights=genExponentialDistribution(strategy6WeightsMean,quantity,seedWeights);
 			weights.sort();
 			break;
 	case 7:
-			weights=genExponentialDistribution(strategy7WeightsMean,quantity,seed);
+			weights=genExponentialDistribution(strategy7WeightsMean,quantity,seedWeights);
 			weights.sort();
 			break;
 
 	default:
-			weights = genUniformDistribution(strategy0WeightsMin,strategy0WeightsMax,quantity,seed);
-			interarrivals=genExponentialDistribution(strategy0InterrarrivalsMean,quantity-1,seed);
+			weights = genUniformDistribution(strategy0WeightsMin,strategy0WeightsMax,quantity,seedWeights);
+			interarrivals=genExponentialDistribution(strategy0InterrarrivalsMean,quantity-1,seedInterarrivals);
 			break;
 	}
 	sigma=0;
@@ -113,7 +114,7 @@ Event feedbackgenerator::lambda(double t) {
 		if(pickwinner){
 			if(strategy==4){
 				if(checkPossibleWinner(&weights,weightOpponent,distOpponent,length)){
-					aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);	
+					aux=pickPossibleWinner(&weights,weightOpponent,distOpponent,length);
 				}else{
 					aux=popRandomElement(&weights);
 				}

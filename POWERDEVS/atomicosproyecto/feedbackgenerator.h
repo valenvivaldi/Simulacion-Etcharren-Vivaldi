@@ -13,7 +13,7 @@
 #include "strategies.h"
 
 
-class feedbackgenerator: public Simulator { 
+class feedbackgenerator: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
@@ -22,8 +22,8 @@ class feedbackgenerator: public Simulator {
 int strategy;
 int quantity;
 int length;
-unsigned int seed;
-
+unsigned int seedWeights;
+unsigned int seedInterarrivals;
 //state
 std::list<double> weights;
 std::list<double> interarrivals;
