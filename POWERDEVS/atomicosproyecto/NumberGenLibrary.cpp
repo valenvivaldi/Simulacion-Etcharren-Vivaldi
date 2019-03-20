@@ -113,7 +113,7 @@ double pickPossibleWinner(std::list<double>* weights, double enemyWeight, double
 	if(it == (*weights).end()){
 		it = (*weights).begin();
 	}
-	int res = *it;
+	double res = *it;
 	(*weights).erase(it);
 	//printLogList(*weights);
 	//printLog("TERMINO SELECCION DE POSIBLE GANADOR: %g\n",res);

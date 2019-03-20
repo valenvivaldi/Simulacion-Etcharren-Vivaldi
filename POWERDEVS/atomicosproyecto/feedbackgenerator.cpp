@@ -12,12 +12,12 @@ void feedbackgenerator::init(double t,...) {
 	length = (int)va_arg(parameters, double);
 	seed = (unsigned int)va_arg(parameters, double);
 
-	/*if(seed == 0){
+	if(seed == 0){
         std::random_device rd;
         srand(rd());
     }else{
         srand(seed);
-    }*/
+    }
 
 	switch(strategy){
 	case 4:
