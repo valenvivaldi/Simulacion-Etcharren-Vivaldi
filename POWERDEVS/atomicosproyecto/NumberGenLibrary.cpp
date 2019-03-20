@@ -54,21 +54,21 @@ void printLogList(std::list<double> a){
 	printLog("}\n");
 }
 
-std::list<double> interleaved(std::list<double> a){
+void interleaved(std::list<double> *a){
     std::list<double> res;
     bool i=0;
-    while(!a.empty()){
+    while(!(*a).empty()){
 		if(i){
-				res.push_back(a.front());
-				a.pop_front();
+				res.push_back((*a).front());
+				(*a).pop_front();
 				i=!i;
 		}else{
-				res.push_back(a.back());
-				a.pop_back();
+				res.push_back((*a).back());
+				(*a).pop_back();
 				i=!i;
 		}
 	}
-    return res;
+	*a = res;
 };
 
 //precondicion: a.size()>0

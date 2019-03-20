@@ -12,7 +12,7 @@
 #include "strategies.h"
 
 
-class generator: public Simulator {
+class generator: public Simulator { 
 // Declare the state,
 // output variables
 // and parameters

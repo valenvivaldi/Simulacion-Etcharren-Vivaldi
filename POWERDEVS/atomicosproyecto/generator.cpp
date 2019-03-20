@@ -26,7 +26,7 @@ void generator::init(double t,...) {
     case 3:
     		weights=genExponentialDistribution(strategy3WeightsMean,quantity,seedWeights);
     		weights.sort();
-    		interleaved(weights);
+    		interleaved(&weights);
     		interarrivals=genExponentialDistribution(strategy3InterrarrivalsMean,quantity-1,seedInterarrivals);
     		break;
     default:
@@ -37,12 +37,12 @@ void generator::init(double t,...) {
 
     sigma=0;
 }
-
 double generator::ta(double t) {
 //This function returns a double.
     return sigma;
-    }
-    void generator::dint(double t) {
+    
+}
+void generator::dint(double t) {
     	if(!weights.empty()){
     		sigma = interarrivals.back();
     		interarrivals.pop_back();
@@ -65,8 +65,8 @@ Event generator::lambda(double t) {
 //     %&Value% points to the variable which contains the value.
 //     %NroPort% is the port number (from 0 to n-1)
     if(!weights.empty()){
-    	aux= weights.back();
-    	weights.pop_back();
+    	aux= weights.front();
+    	weights.pop_front();
 
     	return Event(&aux,0);
 

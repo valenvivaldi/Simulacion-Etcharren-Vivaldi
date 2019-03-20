@@ -89,18 +89,13 @@ Event counter::lambda(double t) {
 }
 void counter::exit() {
 //Code executed at the end of the simulation.
-    printLog("--------------Resultados simulacion----------");
-    printLog("---------------------------------------------");
-    printLog("---------------------------------------------");
-    printLog("---------------------------------------------\n");
+    printLog("\n-------------- Resultados simulacion ----------\n");
     printLog("Colisiones ganadas por Jugador: %d \n",colWinJ);
     printLog("Colisiones ganadas por Pc: %d \n",colWinPc);
     printLog("Colisiones empatadas: %d \n",colTie);
     printLog("Arrivos Jugador: %d \n",arrivalJ);
     printLog("Arrivos Pc: %d \n",arrivalPc);
     printLog("Total: %d \n",arrivalPc+arrivalJ+colTie*2+colWinJ+colWinPc);
-    printLog("---------------------------------------------");
-    printLog("---------------------------------------------");
-    printLog("---------------------------------------------");
+    printLog("-------------------------------------------------\n\n");
 
 }
