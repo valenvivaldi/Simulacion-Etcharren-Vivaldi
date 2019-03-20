@@ -26,10 +26,6 @@ std::list<double> genExponentialDistribution(double mean, int qty,unsigned int s
           entero2++;
         }else{entero3++;}
     }
-    printLog ("media  %g\n", total / qty);
-    printLog("menores que 5 %d \n",entero1);
-    printLog("normales  %d \n",entero3);
-    printLog("mayores que 10 %d \n",entero2);
     return arrExp;
 };
 
@@ -51,11 +47,11 @@ std::list<double> genUniformDistribution(double min, double max, int qty,unsigne
 
 void printLogList(std::list<double> a){
 	std::list<double>::iterator it;
-	//printLog("lista:{");
+	printLog("lista:{");
 	for(it = a.begin(); it != a.end(); ++it){
-		//printLog("%g,",*it);
+		printLog("%g,",*it);
 	}
-	//printLog("}\n");
+	printLog("}\n");
 }
 
 std::list<double> interleaved(std::list<double> a){
@@ -76,7 +72,6 @@ std::list<double> interleaved(std::list<double> a){
 };
 
 //precondicion: a.size()>0
-
 double popRandomElement(std::list<double>* a){
     //printLog("Necesitamos un aleatorio de esta lista \n");
     //printLogList(*a);
@@ -122,14 +117,14 @@ double pickPossibleWinner(std::list<double>* weights, double enemyWeight, double
 
 }
 
-bool checkPossibleWinner(std::list<double>* weights, double enemyWeight, double enemyDistance, double length){
-  if((*weights).size()<=0){
+bool checkPossibleWinner(std::list<double> weights, double enemyWeight, double enemyDistance, double length){
+  if((weights).size()<=0){
     return 0;
   }
 	double collitionPlace = (length - enemyDistance)/2 ;
 	double powerEnemy = power(enemyWeight,enemyDistance+collitionPlace);
 		//printLog("Vamos a checkear si el peso mas grande  de los que quedan, le gana al elemento ganador\n");
-		if(power((*weights).back(),collitionPlace)>powerEnemy){
+		if(power((weights).back(),collitionPlace)>powerEnemy){
 			//printLog("Le gana! mandamos el mas chico posible\n");
 			return 1;
 		}else{
