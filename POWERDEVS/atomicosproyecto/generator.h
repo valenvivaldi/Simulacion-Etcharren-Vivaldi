@@ -12,7 +12,7 @@
 #include "strategies.h"
 
 
-class generator: public Simulator { 
+class generator: public Simulator {
 // Declare the state,
 // output variables
 // and parameters
@@ -22,7 +22,8 @@ class generator: public Simulator {
 
 int strategy;
 int quantity;
-unsigned int seed;
+unsigned int seedWeights;
+unsigned int seedInterarrivals;
 
 //state
 std::list<double> weights;

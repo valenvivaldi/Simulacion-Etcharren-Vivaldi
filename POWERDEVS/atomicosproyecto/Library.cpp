@@ -47,9 +47,9 @@ double distSecond(std::list< std::pair<double,double> > queue , double time,doub
 }
 
 void showQueue (std::list< std::pair<double,double> > queue){
-	//printLog("{");
+	printLog("{");
 	for (std::list<std::pair<double,double> >::iterator it=queue.begin(); it != queue.end(); ++it){
-		//printLog("%f,",(*it).first);
+		printLog("%f,",(*it).first);
 	}
-	//printLog("}\n");
+	printLog("}\n");
 }

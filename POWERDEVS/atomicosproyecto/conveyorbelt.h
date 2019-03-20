@@ -22,14 +22,12 @@ double vc;
 //colas que guarda peso y tiempo de arribo de cada objeto
 std::list<std::pair<double,double> > cJ;
 std::list<std::pair<double,double> > cPc;
-//tiempo de ejecucion
-double time;
+
 
 double sigma;
 
 
-double value1[3]; //stores the value to return in the event of a collision (only sent through port 0)
-double value2[3]; //stores the value to return in the case that the end of the tape is reached (only sent through port 1)
+double value[3]; //stores the value to return in the event of a collision (only sent through port 0) //stores the value to return in the case that the end of the tape is reached (only sent through port 1)
 
 
 
