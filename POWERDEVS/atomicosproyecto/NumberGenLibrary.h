@@ -11,6 +11,6 @@ std::list<double> genExponentialDistribution(double mean, int qty,unsigned int s
 std::list<double> genUniformDistribution(double min, double max, int qty,unsigned int seed);
 void interleaved(std::list<double>* a);
 double popRandomElement(std::list<double>* a);
-
+double popWeightMayorPcElem(std::list<double>* weights,double enemyWeight);
 double pickPossibleWinner(std::list<double>* weights, double enemyWeight, double enemyDistance, double length );
 bool checkPossibleWinner(std::list<double> weights, double enemyWeight, double enemyDistance, double length );
