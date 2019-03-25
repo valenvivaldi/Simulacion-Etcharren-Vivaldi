@@ -15,9 +15,11 @@ void interleaved(std::list<double>* a);
 double popRandomElement(std::list<double>* a);
 
 //Saca el mayor elemento de la lista
+//Si no lo encuentra saca un elemento random
 double popWeightMayorPcElem(std::list<double>* weights,double enemyWeight);
 
 //Saca el elemento que puede ganarle al peso enemyWeight segun la distancia que este recorrio y el tiempo en que se producira la proxima colision
+//Si no lo encuentra saca un elemento random
 double pickPossibleWinner(std::list<double>* weights, double enemyWeight, double enemyDistance, double length );
 
 //Cheque si hay pesos que puedan ganarle a enemyWeight

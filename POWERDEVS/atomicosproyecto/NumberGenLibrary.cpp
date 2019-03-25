@@ -105,7 +105,6 @@ double popWeightMayorPcElem(std::list<double>* weights,double enemyWeight){
         res = *it;
         (*weights).erase(it);
     }
-    (*weights).erase(it);
     //printLogList(*weights);
     //printLog("TERMINO SELECCION DE POSIBLE GANADOR: %g\n",res);
     return res;
