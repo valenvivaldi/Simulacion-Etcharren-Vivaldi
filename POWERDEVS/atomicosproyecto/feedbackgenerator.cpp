@@ -76,7 +76,7 @@ void feedbackgenerator::dext(Event x, double t) {
                         pickwinner=1;
                         sigma=0;
                     }else{
-                        sigma=std::numeric_limits<double>::max();                        
+                        sigma=std::numeric_limits<double>::max();
                     }
                 }else{
                     sigma=0;
@@ -105,7 +105,7 @@ void feedbackgenerator::dext(Event x, double t) {
                     pickwinner=1;
                     sigma=0;
                 }else{
-                    sigma=std::numeric_limits<double>::max();                        
+                    sigma=std::numeric_limits<double>::max();
                 }
             }else{
                 sigma=0;
@@ -124,7 +124,6 @@ Event feedbackgenerator::lambda(double t) {
         if(pickwinner){
             if (strategy == 4){
                 aux = popWeightMayorPcElem(&weights,weightOpponent);
-							printLog("PASO EL POP WEIGHT MAYOR \n");
             }
             else if(strategy==5){
                 aux=weights.front();
