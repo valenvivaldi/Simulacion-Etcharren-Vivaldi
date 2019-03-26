@@ -23,12 +23,17 @@ Root-Coordinator
   Simulator
    {
     Path = atomicosproyecto/feedbackgenerator.h
-    Parameters = 7.000000e+00,1.000000e+02,2.500000e+01,9.242310e+08,1.478610e+09
+    Parameters = 4.000000e+00,1.000000e+02,2.500000e+01,9.242310e+08,1.478610e+09
    }
   Simulator
    {
     Path = sinks/gnuplot.h
     Parameters = 2.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Llegadas'","with lines title 'Pc'","with lines title 'Jugador'","","",""
+   }
+  Simulator
+   {
+    Path = sinks/gnuplot.h
+    Parameters = 1.000000e+00,"set xrange [0:%tf] @ set grid @ set title 'Plot'","title 'First output'","","","",""
    }
   EIC
    {
@@ -44,10 +49,11 @@ Root-Coordinator
     (0,4);(5,1)
     (0,0);(1,0)
     (0,2);(1,2)
-    (4,0);(2,1)
     (2,0);(4,0)
     (2,0);(0,0)
     (2,1);(4,1)
     (2,1);(0,1)
+    (4,0);(6,0)
+    (4,0);(2,1)
    }
  }

@@ -119,7 +119,7 @@ Coupled
                 }
             Parameters
                 {
-                strategy = Val; 7 ; 
+                strategy = Val; 4 ; 
                 quantity = Val; 100 ; 
                 length = Val; 25 ; 
                 seedWeights = Val; 9.24231e+08 ; 
