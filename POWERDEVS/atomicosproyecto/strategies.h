@@ -1,4 +1,4 @@
-//constantes de las estrategias
+//Constantes de las estrategias
 
 #define strategy0WeightsMin 5
 #define strategy0WeightsMax 10
