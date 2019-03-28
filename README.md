@@ -96,12 +96,8 @@ seed Intearrivo PC 1171049869
 seed Peso Jugador 1646868795
 seed Intearrivo Jugador 2051556034
 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+INFORME:
 
-Links:
-
-Hoja de calculo con estadisticos de las corridas:
-https://docs.google.com/spreadsheets/d/1yM3mydp4G_287xeEKn-x_JRXC-pgtHnYd27chdpC7fw/edit?usp=sharing
-
-Informe de conclusiones:
-https://docs.google.com/document/d/1AzN_0CEdL8tE0pOwzgHaoCrLgCyxWYvQ7ItxU6vCrdo/edit?usp=sharing
+El informe con las conclusiones de las estrategias y los resultados de los estadisticos se encuentran en la carpeta "Documentacion"
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
